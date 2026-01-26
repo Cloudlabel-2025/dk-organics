@@ -21,7 +21,7 @@ export default function Home() {
     },
     {
       title: "Organic Growth",
-      desc: "Supporting local ecosystems and sustainable farming practices.",
+      desc: "Supporting local ecosystems and  farming practices.",
       icon: "🍃"
     }
   ];

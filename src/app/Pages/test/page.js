@@ -40,7 +40,7 @@ const Page = () => {
     }
   };
 
-  if (loading) return <div className="p-5 text-center">Loading Farm Insights...</div>;
+  if (loading) return <div className="p-5 text-center">Loading Farm Insight...</div>;
 
   return (
     <div className="position-relative">
