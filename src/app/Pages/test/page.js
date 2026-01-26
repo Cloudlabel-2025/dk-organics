@@ -50,7 +50,7 @@ const Page = () => {
           <Image src="/1.jpg" alt="Farm" fill priority style={{ objectFit: 'cover' }} className="opacity-25" />
         </div>
         <div className="container position-relative py-5 text-center" style={{ zIndex: 1 }}>
-          <h1 className="display-4 fw-bold text-dark">Organic Database</h1>
+          <h1 className="display-4 fw-bold text-dark">Organics Database</h1>
           <p className="lead">Manage and view your farm research records.</p>
         </div>
       </section>
