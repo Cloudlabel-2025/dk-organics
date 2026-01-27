@@ -40,7 +40,7 @@ export default function Header() {
           <li><Link href="/services" onClick={closeMenu}>Services</Link></li>
          <li><Link href="/blog" onClick={closeMenu}>Blog</Link></li>
           <li><Link href="/contact" onClick={closeMenu}>Contact</Link></li>
-          {/* Mobile-only CTA */}
+          <li className="mobile-only"><Link href="/login" onClick={closeMenu}>Login</Link></li>
         </ul>
 
         {/* RIGHT SECTION: Desktop Button + Toggle */}
