@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { UpdateProducts } from "./UpdateProducts";
 import { UpdateBlogs } from "./UpdateBlogs";
+import { ManageUsers } from "./ManageUsers";
 
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState('products');
@@ -136,6 +137,25 @@ const Dashboard = () => {
           >
             Blog Management
           </div>
+
+          <div 
+            onClick={() => {
+              setActiveSection('manage-users');
+              if (isMobile) setSidebarOpen(false);
+            }}
+            style={{
+              padding: '15px 30px',
+              color: activeSection === 'manage-users' ? '#1a3d1e' : 'white',
+              backgroundColor: activeSection === 'manage-users' ? '#8AB440' : 'transparent',
+              cursor: 'pointer',
+              borderLeft: activeSection === 'manage-users' ? '4px solid #FCFAF2' : '4px solid transparent',
+              transition: 'all 0.3s ease',
+              fontSize: '1.1rem',
+              fontWeight: '600'
+            }}
+          >
+            Manage Users
+          </div>
         </nav>
 
         <div style={{ position: 'absolute', bottom: '30px', left: '30px', right: '30px' }}>
@@ -263,6 +283,8 @@ const Dashboard = () => {
         return <UpdateProducts />;
       case 'delete-blogs':
         return <UpdateBlogs />;
+      case 'manage-users':
+        return <ManageUsers />;
       default:
         return (
           <div style={{ textAlign: 'center', padding: '60px 20px' }}>

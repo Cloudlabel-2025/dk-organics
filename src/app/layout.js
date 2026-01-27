@@ -1,7 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/app/Components/Header";
-import Footer from "@/app/Components/Footer";
 import "animate.css";
 
 const geistSans = Geist({
@@ -15,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Coming Soon",
-  description: "Something meaningful is on the way",
+  title: "DK Organics",
+  description: "Organic farming solutions",
 };
 
 export default function RootLayout({ children }) {
