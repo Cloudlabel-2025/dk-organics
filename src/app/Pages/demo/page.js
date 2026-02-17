@@ -130,7 +130,7 @@ export default function UsersPage() {
               </li>
             ))
           ) : (
-            <p style={{ color: "#999" }}>No users found in database.</p>
+            <p style={{ color: "#999" }}>No users found in database</p>
           )}
         </ul>
       </section>
