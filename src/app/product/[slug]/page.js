@@ -8,7 +8,6 @@ const ProductDetailPage = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -30,7 +29,6 @@ const ProductDetailPage = () => {
     try {
       const res = await fetch(`/api/productpage/${slug}`);
       const data = await res.json();
-      
       if (data.success) {
         setProduct(data.data);
       } else {
@@ -51,7 +49,7 @@ const ProductDetailPage = () => {
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'center',
-        backgroundColor: '#FCFAF2'
+        backgroundColor: '#F2F7F0'
       }}>
         <h2 style={{ color: '#8AB440' }}>Loading Product...</h2>
       </div>
@@ -65,7 +63,7 @@ const ProductDetailPage = () => {
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'center',
-        backgroundColor: '#FCFAF2'
+        backgroundColor: '#F2F7F0'
       }}>
         <div style={{ textAlign: 'center' }}>
           <h2 style={{ color: '#8AB440', marginBottom: '20px' }}>Product Not Found</h2>
@@ -86,38 +84,85 @@ const ProductDetailPage = () => {
 
   return (
     <div style={{ 
-      display: 'flex', 
-      flexDirection: isMobile ? 'column' : 'row',
       minHeight: '100vh',
-      fontFamily: 'Georgia, serif'
+      backgroundColor: '#F2F7F0',
+      padding: isMobile ? '40px 20px' : '50px',
+      position: 'relative',
+      overflow: 'hidden'
     }}>
       
-      {/* Left Side - Pure White */}
+      {/* Decorative Bubbles */}
       <div style={{
-        flex: '1',
-        backgroundColor: '#FFFFFF',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: isMobile ? '20px' : '40px',
+        position: 'fixed',
+        top: '-50px',
+        left: '-50px',
+        width: '200px',
+        height: '200px',
+        backgroundColor: 'rgba(138, 180, 64, 0.08)',
+        borderRadius: '50%',
+        zIndex: 0,
+        pointerEvents: 'none'
+      }}></div>
+      <div style={{
+        position: 'fixed',
+        top: '10%',
+        right: '-80px',
+        width: '250px',
+        height: '250px',
+        backgroundColor: 'rgba(47, 82, 51, 0.06)',
+        borderRadius: '50%',
+        zIndex: 0,
+        pointerEvents: 'none'
+      }}></div>
+      <div style={{
+        position: 'fixed',
+        bottom: '-60px',
+        left: '5%',
+        width: '220px',
+        height: '220px',
+        backgroundColor: 'rgba(138, 180, 64, 0.07)',
+        borderRadius: '50%',
+        zIndex: 0,
+        pointerEvents: 'none'
+      }}></div>
+      <div style={{
+        position: 'fixed',
+        bottom: '10%',
+        right: '-70px',
+        width: '240px',
+        height: '240px',
+        backgroundColor: 'rgba(47, 82, 51, 0.05)',
+        borderRadius: '50%',
+        zIndex: 0,
+        pointerEvents: 'none'
+      }}></div>
+
+      {/* Main Container */}
+      <div style={{
         position: 'relative',
-        minHeight: isMobile ? '50vh' : 'auto'
+        zIndex: 1,
+        backgroundColor: 'white',
+        borderRadius: '50px',
+        padding: isMobile ? '40px 25px' : '60px',
+        boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
+        border: '1px solid rgba(138, 180, 64, 0.1)',
+        display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+        gap: isMobile ? '40px' : '60px',
+        maxWidth: '1400px',
+        margin: '0 auto'
       }}>
-        
+
         {/* Back Button */}
-        <Link href="/product">
+        <Link href="/product" style={{ position: 'absolute', top: '30px', left: '30px', zIndex: 10 }}>
           <button style={{
-            position: 'absolute',
-            top: isMobile ? '10px' : '40px',
-            left: isMobile ? '10px' : '40px',
-            padding: isMobile ? '8px 16px' : '12px 20px',
+            padding: '10px 20px',
             backgroundColor: 'transparent',
             color: '#8AB440',
             border: '2px solid #8AB440',
             borderRadius: '25px',
             cursor: 'pointer',
-            fontSize: isMobile ? '0.9rem' : '1rem',
+            fontSize: '1rem',
             fontWeight: '600',
             transition: 'all 0.3s ease'
           }}
@@ -133,193 +178,166 @@ const ProductDetailPage = () => {
           </button>
         </Link>
 
-        {/* Large Product Image */}
+        {/* Left Section - Image */}
         <div style={{
-          maxWidth: isMobile ? '100%' : '500px',
-          width: '100%',
-          textAlign: 'center'
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginTop: isMobile ? '0' : '40px'
         }}>
-          <img 
-            src={product.image || '/1.jpg'} 
-            alt={product.name}
-            style={{
-              width: '100%',
-              maxWidth: isMobile ? '300px' : '450px',
-              height: isMobile ? '300px' : '600px',
-              objectFit: 'cover',
-              borderRadius: '20px',
-              boxShadow: '0 20px 60px rgba(0,0,0,0.1)'
-            }}
-          />
+          <div style={{
+            backgroundColor: '#FFFFFF',
+            borderRadius: '30px',
+            padding: '30px',
+            boxShadow: '0 15px 40px rgba(0,0,0,0.08)',
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: '450px'
+          }}>
+            <img 
+              src={product.image || '/1.jpg'} 
+              alt={product.name}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain',
+                borderRadius: '20px'
+              }}
+            />
+          </div>
         </div>
-      </div>
 
-      {/* Right Side - Light Green */}
-      <div style={{
-        flex: '1',
-        backgroundColor: '#F2F7F0',
-        padding: isMobile ? '30px 20px' : '60px 50px',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center'
-      }}>
-        
-        {/* Product Title */}
-        <h1 style={{
-          fontSize: isMobile ? '2.5rem' : '3.5rem',
-          fontWeight: 'bold',
-          color: '#2F5233',
-          marginBottom: '20px',
-          lineHeight: '1.1',
-          fontFamily: 'Georgia, serif'
-        }}>{product.name}</h1>
-        
-        {/* Green Accent Line */}
+        {/* Right Section - Content */}
         <div style={{
-          width: '80px',
-          height: '4px',
-          backgroundColor: '#8AB440',
-          marginBottom: '30px',
-          borderRadius: '2px'
-        }}></div>
-        
-        {/* Product Description */}
-        <p style={{
-          fontSize: isMobile ? '1.1rem' : '1.3rem',
-          lineHeight: '1.7',
-          color: '#555',
-          marginBottom: '40px',
-          fontFamily: 'Georgia, serif'
-        }}>{product.description}</p>
-        
-        {/* Benefit Cards */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
-          gap: '20px',
-          marginBottom: '40px'
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          paddingTop: isMobile ? '0' : '40px'
         }}>
-          {product.benefits && product.benefits.length > 0 ? (
-            product.benefits.slice(0, 2).map((benefit, index) => (
-              <div key={index} style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.7)',
-                backdropFilter: 'blur(10px)',
-                padding: '25px',
-                borderRadius: '15px',
-                border: '1px solid rgba(255, 255, 255, 0.3)'
-              }}>
-                <h4 style={{
-                  color: '#2F5233',
-                  marginBottom: '10px',
-                  fontSize: '1.1rem',
-                  fontWeight: 'bold'
-                }}>{benefit}</h4>
-                <p style={{
-                  color: '#666',
-                  fontSize: '0.95rem',
-                  margin: 0,
-                  lineHeight: '1.5'
-                }}>Natural organic goodness for your health</p>
-              </div>
-            ))
-          ) : (
-            <>
-              <div style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.7)',
-                backdropFilter: 'blur(10px)',
-                padding: '25px',
-                borderRadius: '15px',
-                border: '1px solid rgba(255, 255, 255, 0.3)'
-              }}>
-                <h4 style={{
-                  color: '#2F5233',
-                  marginBottom: '10px',
-                  fontSize: '1.1rem',
-                  fontWeight: 'bold'
-                }}>100% Organic</h4>
-                <p style={{
-                  color: '#666',
-                  fontSize: '0.95rem',
-                  margin: 0,
-                  lineHeight: '1.5'
-                }}>Certified organic quality</p>
-              </div>
-              <div style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.7)',
-                backdropFilter: 'blur(10px)',
-                padding: '25px',
-                borderRadius: '15px',
-                border: '1px solid rgba(255, 255, 255, 0.3)'
-              }}>
-                <h4 style={{
-                  color: '#2F5233',
-                  marginBottom: '10px',
-                  fontSize: '1.1rem',
-                  fontWeight: 'bold'
-                }}>Fresh & Natural</h4>
-                <p style={{
-                  color: '#666',
-                  fontSize: '0.95rem',
-                  margin: 0,
-                  lineHeight: '1.5'
-                }}>Farm fresh goodness</p>
-              </div>
-            </>
-          )}
-        </div>
-        
-        {/* Action Buttons */}
-        <div style={{ display: 'flex', gap: '20px', alignItems: 'center', flexDirection: 'column' }}>
-          <button 
-            style={{
-              padding: '18px 35px',
-              backgroundColor: '#2F5233',
-              color: 'white',
-              border: 'none',
-              borderRadius: '50px',
-              fontSize: '1.1rem',
-              fontWeight: '600',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              minWidth: '200px'
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.backgroundColor = '#1e3d22';
-              e.target.style.transform = 'translateY(-2px)';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.backgroundColor = '#2F5233';
-              e.target.style.transform = 'translateY(0)';
-            }}
-          >
-            Add to Cart
-          </button>
           
-          <a 
-            href="/product-brochure.pdf" 
-            download
-            style={{
-              padding: '12px 25px',
-              backgroundColor: 'transparent',
+          {/* Heading */}
+          <h1 style={{
+            fontSize: isMobile ? '2.2rem' : '3.2rem',
+            fontWeight: 'bold',
+            color: '#2F5233',
+            marginBottom: '15px',
+            lineHeight: '1.2',
+            fontFamily: 'Georgia, serif'
+          }}>
+            {product.name}
+          </h1>
+
+          {/* Underline Accent */}
+          <div style={{
+            width: '80px',
+            height: '4px',
+            backgroundColor: '#8AB440',
+            marginBottom: '30px',
+            borderRadius: '2px'
+          }}></div>
+
+          {/* Description */}
+          <p style={{
+            fontSize: isMobile ? '1rem' : '1.15rem',
+            lineHeight: '1.8',
+            color: '#555',
+            marginBottom: '35px',
+            fontFamily: 'Georgia, serif',
+            whiteSpace: 'pre-wrap',
+            wordWrap: 'break-word'
+          }}>
+            {product.description}
+          </p>
+
+          {/* Highlight Card */}
+          <div style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            borderRadius: '25px',
+            padding: '25px',
+            marginBottom: '40px',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.06)',
+            border: '1px solid rgba(138, 180, 64, 0.15)'
+          }}>
+            <h4 style={{
               color: '#2F5233',
-              textDecoration: 'none',
-              borderRadius: '25px',
-              fontWeight: '600',
-              border: '2px solid #2F5233',
-              fontSize: '1rem',
-              transition: 'all 0.3s ease'
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.backgroundColor = '#2F5233';
-              e.target.style.color = 'white';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.backgroundColor = 'transparent';
-              e.target.style.color = '#2F5233';
-            }}
-          >
-            📄 Download Brochure
-          </a>
+              marginBottom: '8px',
+              fontSize: '1.1rem',
+              fontWeight: 'bold',
+              margin: '0 0 8px 0'
+            }}>
+              Good product
+            </h4>
+            <p style={{
+              color: '#666',
+              fontSize: '0.95rem',
+              margin: 0,
+              lineHeight: '1.5'
+            }}>
+              Natural organic goodness for your health
+            </p>
+          </div>
+
+          {/* Buttons */}
+          <div style={{ 
+            display: 'flex', 
+            gap: '20px', 
+            flexDirection: isMobile ? 'column' : 'row',
+            alignItems: 'flex-start'
+          }}>
+            <button 
+              style={{
+                padding: '16px 40px',
+                backgroundColor: '#2F5233',
+                color: 'white',
+                border: 'none',
+                borderRadius: '45px',
+                fontSize: '1rem',
+                fontWeight: '600',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                flex: isMobile ? '1' : 'auto'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#1e3d22';
+                e.target.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = '#2F5233';
+                e.target.style.transform = 'translateY(0)';
+              }}
+            >
+              Add to Cart
+            </button>
+            
+            <a 
+              href="/product-brochure.pdf" 
+              download
+              style={{
+                padding: '16px 40px',
+                backgroundColor: 'transparent',
+                color: '#2F5233',
+                textDecoration: 'none',
+                borderRadius: '45px',
+                fontWeight: '600',
+                border: '2px solid #2F5233',
+                fontSize: '1rem',
+                transition: 'all 0.3s ease',
+                display: 'inline-block'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#2F5233';
+                e.target.style.color = 'white';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'transparent';
+                e.target.style.color = '#2F5233';
+              }}
+            >
+              📄 Download Brochure
+            </a>
+          </div>
         </div>
       </div>
     </div>

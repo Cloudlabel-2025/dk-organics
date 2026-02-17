@@ -38,15 +38,15 @@ export default function Header() {
           <li><Link href="/about" onClick={closeMenu}>About</Link></li>
           <li><Link href="/product" onClick={closeMenu}>Products</Link></li>
           <li><Link href="/services" onClick={closeMenu}>Services</Link></li>
-         <li><Link href="/blog" onClick={closeMenu}>Blog</Link></li>
+          <li><Link href="/blog" onClick={closeMenu}>Blog</Link></li>
           <li><Link href="/contact" onClick={closeMenu}>Contact</Link></li>
           <li className="mobile-only"><Link href="/login" onClick={closeMenu}>Login</Link></li>
         </ul>
 
         {/* RIGHT SECTION: Desktop Button + Toggle */}
         <div className="header-right">
-          <Link href="/login">
-            <button className="cta-btn-organic desktop-only">
+          <Link href="/login" className="desktop-only">
+            <button className="cta-btn-organic">
               Login
             </button>
           </Link>

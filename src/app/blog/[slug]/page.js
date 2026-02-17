@@ -51,7 +51,7 @@ const BlogDetailPage = () => {
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'center',
-        backgroundColor: '#FCFAF2'
+        backgroundColor: '#F2F7F0'
       }}>
         <h2 style={{ color: '#8AB440' }}>Loading Blog Post...</h2>
       </div>
@@ -65,7 +65,7 @@ const BlogDetailPage = () => {
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'center',
-        backgroundColor: '#FCFAF2'
+        backgroundColor: '#F2F7F0'
       }}>
         <div style={{ textAlign: 'center' }}>
           <h2 style={{ color: '#8AB440', marginBottom: '20px' }}>Blog Post Not Found</h2>
@@ -85,21 +85,66 @@ const BlogDetailPage = () => {
   }
 
   return (
-    <div style={{ backgroundColor: '#FCFAF2', minHeight: '100vh', padding: isMobile ? '20px' : '40px' }}>
+    <div style={{ 
+      backgroundColor: '#F2F7F0', 
+      minHeight: '100vh', 
+      padding: isMobile ? '40px 20px' : '50px',
+      position: 'relative',
+      overflow: 'hidden',
+      scrollBehavior: 'smooth'
+    }}>
       
+      {/* Decorative Bubbles */}
+      <div style={{
+        position: 'fixed',
+        top: '-80px',
+        right: '-80px',
+        width: '280px',
+        height: '280px',
+        backgroundColor: 'rgba(138, 180, 64, 0.08)',
+        borderRadius: '50%',
+        zIndex: 0,
+        pointerEvents: 'none'
+      }}></div>
+      <div style={{
+        position: 'fixed',
+        bottom: '-100px',
+        left: '-100px',
+        width: '300px',
+        height: '300px',
+        backgroundColor: 'rgba(47, 82, 51, 0.06)',
+        borderRadius: '50%',
+        zIndex: 0,
+        pointerEvents: 'none'
+      }}></div>
+      <div style={{
+        position: 'fixed',
+        top: '50%',
+        right: '-120px',
+        width: '250px',
+        height: '250px',
+        backgroundColor: 'rgba(138, 180, 64, 0.05)',
+        borderRadius: '50%',
+        zIndex: 0,
+        pointerEvents: 'none'
+      }}></div>
+
       {/* Article Container */}
       <article style={{
-        maxWidth: '900px',
+        maxWidth: '800px',
         margin: '0 auto',
         backgroundColor: 'white',
-        borderRadius: '0px 0px 100px 0px',
+        borderRadius: isMobile ? '30px' : '50px',
         overflow: 'hidden',
-        boxShadow: '0 15px 50px rgba(0,0,0,0.1)',
-        position: 'relative'
+        boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
+        position: 'relative',
+        zIndex: 1,
+        animation: 'fadeIn 0.6s ease-in-out',
+        border: '1px solid rgba(138, 180, 64, 0.1)'
       }}>
         
         {/* Back Button */}
-        <div style={{ padding: '30px 40px 0', position: 'relative', zIndex: 10 }}>
+        <div style={{ padding: isMobile ? '25px 20px 0' : '40px 40px 0', position: 'relative', zIndex: 10 }}>
           <Link href="/blog">
             <button style={{
               padding: '10px 20px',
@@ -125,8 +170,14 @@ const BlogDetailPage = () => {
           </Link>
         </div>
 
-        {/* Hero Image */}
-        <div style={{ height: isMobile ? '250px' : '400px', position: 'relative', margin: '20px 0' }}>
+        {/* Hero Section */}
+        <div style={{ 
+          height: isMobile ? '280px' : '450px', 
+          position: 'relative', 
+          margin: isMobile ? '20px 20px 0' : '30px 0 0',
+          borderRadius: isMobile ? '20px' : '40px',
+          overflow: 'hidden'
+        }}>
           <Image 
             src={blog.coverImage || '/1.jpg'} 
             alt={blog.title}
@@ -135,40 +186,50 @@ const BlogDetailPage = () => {
             priority
           />
           
-          {/* Overlay with blog info */}
+          {/* Dark Gradient Overlay */}
           <div style={{
             position: 'absolute',
             bottom: 0,
             left: 0,
             right: 0,
-            background: 'linear-gradient(transparent, rgba(0,0,0,0.7))',
-            padding: '40px',
+            background: 'linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.3), transparent)',
+            padding: isMobile ? '30px 25px' : '50px 40px',
             color: 'white'
           }}>
+            {/* Category Badge */}
             <div style={{
               backgroundColor: '#8AB440',
               color: 'white',
-              padding: '6px 16px',
-              borderRadius: '20px',
-              fontSize: '0.8rem',
+              padding: '8px 18px',
+              borderRadius: '25px',
+              fontSize: '0.75rem',
               fontWeight: 'bold',
               display: 'inline-block',
-              marginBottom: '15px'
+              marginBottom: '20px',
+              letterSpacing: '0.5px'
             }}>
               ORGANIC INSIGHTS
             </div>
+
+            {/* Title */}
             <h1 style={{
-              fontSize: isMobile ? '1.8rem' : '2.5rem',
+              fontSize: isMobile ? '1.8rem' : '3rem',
               fontWeight: 'bold',
-              margin: '0',
-              lineHeight: '1.2'
-            }}>{blog.title}</h1>
-            <p style={{
-              fontSize: '0.9rem',
-              margin: '10px 0 0',
-              opacity: 0.9
+              margin: '0 0 15px 0',
+              lineHeight: '1.2',
+              fontFamily: 'Georgia, serif'
             }}>
-              Published on {new Date(blog.createdAt).toLocaleDateString('en-US', {
+              {blog.title}
+            </h1>
+
+            {/* Metadata */}
+            <p style={{
+              fontSize: isMobile ? '0.85rem' : '0.95rem',
+              margin: '0',
+              opacity: 0.95,
+              letterSpacing: '0.3px'
+            }}>
+              5 min read • {new Date(blog.createdAt).toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
@@ -177,51 +238,64 @@ const BlogDetailPage = () => {
           </div>
         </div>
 
-        {/* Article Content */}
-        <div style={{ padding: isMobile ? '30px 25px' : '50px 60px' }}>
+        {/* Content Section */}
+        <div style={{ 
+          padding: isMobile ? '40px 25px' : '60px 60px',
+          maxWidth: '750px',
+          margin: '0 auto'
+        }}>
           
-          {/* Content */}
+          {/* Divider */}
           <div style={{
-            fontSize: '1.1rem',
+            height: '2px',
+            backgroundColor: 'rgba(138, 180, 64, 0.2)',
+            marginBottom: '40px'
+          }}></div>
+
+          {/* Article Content */}
+          <div style={{
+            fontSize: isMobile ? '1rem' : '1.1rem',
             lineHeight: '1.8',
-            color: '#444',
+            color: '#2F5233',
             fontFamily: 'Georgia, serif'
           }}>
             {blog.content.split('\n').map((paragraph, index) => (
-              <p key={index} style={{ marginBottom: '25px' }}>
+              <p key={index} style={{ 
+                marginBottom: '30px',
+                textAlign: 'justify'
+              }}>
                 {paragraph}
               </p>
             ))}
           </div>
 
-
-
-          {/* Navigation */}
+          {/* Button Section */}
           <div style={{
-            marginTop: '40px',
+            marginTop: '60px',
             textAlign: 'center',
-            paddingTop: '30px',
-            borderTop: '1px solid #E8F5E8'
+            paddingTop: '40px',
+            borderTop: '2px solid rgba(138, 180, 64, 0.15)'
           }}>
             <Link href="/blog">
               <button style={{
-                padding: '15px 35px',
+                padding: '18px 45px',
                 backgroundColor: '#2F5233',
                 color: 'white',
                 border: 'none',
-                borderRadius: '25px',
-                fontSize: '1.1rem',
+                borderRadius: '45px',
+                fontSize: isMobile ? '1rem' : '1.1rem',
                 fontWeight: '600',
                 cursor: 'pointer',
-                transition: 'all 0.3s ease'
+                transition: 'all 0.3s ease',
+                boxShadow: '0 10px 30px rgba(47, 82, 51, 0.2)'
               }}
               onMouseEnter={(e) => {
                 e.target.style.backgroundColor = '#1e3d22';
-                e.target.style.transform = 'translateY(-2px)';
+                e.target.style.transform = 'scale(1.05)';
               }}
               onMouseLeave={(e) => {
                 e.target.style.backgroundColor = '#2F5233';
-                e.target.style.transform = 'translateY(0)';
+                e.target.style.transform = 'scale(1)';
               }}>
                 Read More Articles
               </button>
@@ -229,6 +303,19 @@ const BlogDetailPage = () => {
           </div>
         </div>
       </article>
+
+      <style>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </div>
   );
 };

@@ -327,24 +327,58 @@ const CreateProductForm = () => {
 
     setUploading(true);
     try {
-      const formDataUpload = new FormData();
-      formDataUpload.append('file', file);
+      const canvas = document.createElement('canvas');
+      const img = new Image();
+      const reader = new FileReader();
 
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formDataUpload
-      });
+      reader.onload = async (event) => {
+        img.onload = async () => {
+          const maxWidth = 800;
+          const maxHeight = 800;
+          let width = img.width;
+          let height = img.height;
 
-      const data = await res.json();
-      if (data.success) {
-        setFormData({...formData, image: data.url});
-        setMessage('✓ Image uploaded successfully!');
-        setTimeout(() => setMessage(''), 2000);
-      }
+          if (width > height) {
+            if (width > maxWidth) {
+              height *= maxWidth / width;
+              width = maxWidth;
+            }
+          } else {
+            if (height > maxHeight) {
+              width *= maxHeight / height;
+              height = maxHeight;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          canvas.toBlob(async (blob) => {
+            const formDataUpload = new FormData();
+            formDataUpload.append('file', blob, file.name);
+
+            const res = await fetch('/api/upload', {
+              method: 'POST',
+              body: formDataUpload
+            });
+
+            const data = await res.json();
+            if (data.success) {
+              setFormData({...formData, image: data.url});
+              setMessage('✓ Image uploaded successfully!');
+              setTimeout(() => setMessage(''), 2000);
+            }
+            setUploading(false);
+          }, 'image/jpeg', 0.8);
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
     } catch (err) {
       setMessage('Error uploading image');
       console.error('Error uploading image:', err);
-    } finally {
       setUploading(false);
     }
   };
