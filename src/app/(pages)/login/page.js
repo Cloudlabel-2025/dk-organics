@@ -45,17 +45,30 @@ const LoginContent = () => {
     }
   };
 
+  const containerStyle = {
+    backgroundColor: '#FCFAF2',
+    minHeight: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '40px 20px',
+    marginTop: '80px'
+  };
+
+  const formContainerStyle = {
+    backgroundColor: 'white',
+    borderRadius: '25px',
+    padding: '50px 40px',
+    boxShadow: '0 15px 35px rgba(138, 180, 64, 0.1)',
+    border: '2px solid #8AB440',
+    maxWidth: '450px',
+    width: '100%',
+    margin: 'auto'
+  };
+
   return (
-    <div style={{ backgroundColor: '#FCFAF2', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
-      <div style={{
-        backgroundColor: 'white',
-        borderRadius: '25px',
-        padding: '50px 40px',
-        boxShadow: '0 15px 35px rgba(138, 180, 64, 0.1)',
-        border: '2px solid #8AB440',
-        maxWidth: '450px',
-        width: '100%'
-      }}>
+    <div style={containerStyle}>
+      <div style={formContainerStyle}>
         
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#2F5233', marginBottom: '10px' }}>

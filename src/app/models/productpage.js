@@ -12,6 +12,7 @@ const ProductSchema = new mongoose.Schema(
     organic: { type: Boolean, default: true },
     benefits: [String],
     origin: String,
+    brochure: { type: String, default: '' },
   },
   { timestamps: true }
 );

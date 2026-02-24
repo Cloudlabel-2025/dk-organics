@@ -1,33 +1,45 @@
-import { writeFile, mkdir } from "fs/promises";
-import { join } from "path";
-import { NextResponse } from "next/server";
+import { v2 as cloudinary } from 'cloudinary';
+import { NextResponse } from 'next/server';
+
+cloudinary.config({
+  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function POST(request) {
   try {
     const formData = await request.formData();
-    const file = formData.get("file");
+    const file = formData.get('file');
 
     if (!file) {
-      return NextResponse.json({ success: false, error: "No file provided" }, { status: 400 });
+      return NextResponse.json({ success: false, error: 'No file provided' }, { status: 400 });
     }
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    const uploadsDir = join(process.cwd(), "public", "uploads");
-    await mkdir(uploadsDir, { recursive: true });
+    const result = await new Promise((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          folder: 'dkorganics',
+          resource_type: 'auto',
+        },
+        (error, result) => {
+          if (error) reject(error);
+          else resolve(result);
+        }
+      );
 
-    const filename = `${Date.now()}-${file.name}`;
-    const filepath = join(uploadsDir, filename);
+      uploadStream.end(buffer);
+    });
 
-    await writeFile(filepath, buffer);
-
-    return NextResponse.json({ 
-      success: true, 
-      url: `/uploads/${filename}` 
+    return NextResponse.json({
+      success: true,
+      url: result.secure_url,
     });
   } catch (err) {
-    console.error("Upload error:", err);
-    return NextResponse.json({ success: false, error: "Upload failed" }, { status: 500 });
+    console.error('Upload error:', err.message);
+    return NextResponse.json({ success: false, error: 'Upload failed' }, { status: 500 });
   }
 }

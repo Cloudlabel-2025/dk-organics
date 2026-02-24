@@ -54,6 +54,34 @@ export const UpdateProducts = () => {
     }
   };
 
+  const handleBrochureUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setEditData({...editData, brochure: data.url});
+        setMessage('✓ Brochure uploaded successfully!');
+        setTimeout(() => setMessage(''), 2000);
+      }
+    } catch (err) {
+      setMessage('Error uploading brochure');
+      console.error('Error uploading brochure:', err);
+    } finally {
+      setUploading(false);
+    }
+  };
+
   const handleEdit = (product) => {
     setEditingId(product._id);
     setEditData({...product});
@@ -150,6 +178,16 @@ export const UpdateProducts = () => {
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Category</label>
                   <input type="text" value={editData.category} onChange={(e) => setEditData({...editData, category: e.target.value})} placeholder="Category" style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Brochure (PDF)</label>
+                  <input type="file" accept=".pdf" onChange={handleBrochureUpload} disabled={uploading} style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
+                  {editData.brochure && (
+                    <div style={{ marginTop: '10px', display: 'flex', gap: '10px', alignItems: 'center' }}>
+                      <span style={{ color: '#2F5233', fontWeight: '600' }}>📄 Brochure uploaded</span>
+                      <button type="button" onClick={() => setEditData({...editData, brochure: ''})} style={{ padding: '5px 10px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '0.8rem' }}>Remove</button>
+                    </div>
+                  )}
                 </div>
                 <div style={{ display: 'flex', gap: '10px' }}>
                   <button onClick={handleSave} style={{ padding: '10px 20px', backgroundColor: '#8AB440', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '600' }}>Save</button>

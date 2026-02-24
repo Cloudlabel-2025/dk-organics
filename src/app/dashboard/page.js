@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { UpdateProducts } from "./UpdateProducts";
 import { UpdateBlogs } from "./UpdateBlogs";
+import { CreateCareerForm, ViewCareers } from "./CareerManagement";
 
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState('products');
@@ -136,6 +137,25 @@ const Dashboard = () => {
           >
             Blog Management
           </div>
+
+          <div 
+            onClick={() => {
+              setActiveSection('careers');
+              if (isMobile) setSidebarOpen(false);
+            }}
+            style={{
+              padding: '15px 30px',
+              color: activeSection === 'careers' || activeSection.includes('career') ? '#1a3d1e' : 'white',
+              backgroundColor: activeSection === 'careers' || activeSection.includes('career') ? '#8AB440' : 'transparent',
+              cursor: 'pointer',
+              borderLeft: activeSection === 'careers' || activeSection.includes('career') ? '4px solid #FCFAF2' : '4px solid transparent',
+              transition: 'all 0.3s ease',
+              fontSize: '1.1rem',
+              fontWeight: '600'
+            }}
+          >
+            Career Management
+          </div>
         </nav>
 
         <div style={{ position: 'absolute', bottom: '30px', left: '30px', right: '30px' }}>
@@ -174,48 +194,52 @@ const Dashboard = () => {
         
         <div style={{ marginBottom: '40px' }}>
           <h2 style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#2F5233', marginBottom: '10px' }}>
-            {isProductSection ? 'Product Management' : 'Blog Management'}
+            {activeSection === 'careers' ? 'Career Management' : isProductSection ? 'Product Management' : 'Blog Management'}
           </h2>
           <p style={{ color: '#666', fontSize: '1.1rem' }}>
-            {isProductSection ? 'Manage your organic product catalog' : 'Create and manage blog content'}
+            {activeSection === 'careers' ? 'Manage job postings' : isProductSection ? 'Manage your organic product catalog' : 'Create and manage blog content'}
           </p>
         </div>
         
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(250px, 1fr))',
-          gap: '25px',
-          marginBottom: '40px'
-        }}>
-          
-          <ActionCard
-            title="Create New"
-            description={`Add new ${isProductSection ? 'product' : 'blog post'}`}
-            color="#8AB440"
-            onClick={() => setActiveSection(isProductSection ? 'create-product' : 'create-blog')}
-          />
-          
-          <ActionCard
-            title="View All"
-            description={`Browse all ${isProductSection ? 'products' : 'blog posts'}`}
-            color="#2F5233"
-            onClick={() => setActiveSection(isProductSection ? 'view-products' : 'view-blogs')}
-          />
-          
-          <ActionCard
-            title="Update"
-            description={`Edit existing ${isProductSection ? 'products' : 'blog posts'}`}
-            color="#6b8e23"
-            onClick={() => setActiveSection(isProductSection ? 'update-products' : 'update-blogs')}
-          />
-          
-          <ActionCard
-            title="Delete"
-            description={`Remove ${isProductSection ? 'products' : 'blog posts'}`}
-            color="#d2691e"
-            onClick={() => setActiveSection(isProductSection ? 'delete-products' : 'delete-blogs')}
-          />
-        </div>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(250px, 1fr))',
+        gap: '25px',
+        marginBottom: '40px'
+      }}>
+        
+        <ActionCard
+          title="Create New"
+          description={`Add new ${activeSection === 'careers' ? 'career posting' : isProductSection ? 'product' : 'blog post'}`}
+          color="#8AB440"
+          onClick={() => setActiveSection(activeSection === 'careers' ? 'create-career' : isProductSection ? 'create-product' : 'create-blog')}
+        />
+        
+        <ActionCard
+          title="View All"
+          description={`Browse all ${activeSection === 'careers' ? 'career postings' : isProductSection ? 'products' : 'blog posts'}`}
+          color="#2F5233"
+          onClick={() => setActiveSection(activeSection === 'careers' ? 'view-careers' : isProductSection ? 'view-products' : 'view-blogs')}
+        />
+        
+        {(isProductSection || activeSection === 'blogs') && (
+          <>
+            <ActionCard
+              title="Update"
+              description={`Edit existing ${isProductSection ? 'products' : 'blog posts'}`}
+              color="#6b8e23"
+              onClick={() => setActiveSection(isProductSection ? 'update-products' : 'update-blogs')}
+            />
+            
+            <ActionCard
+              title="Delete"
+              description={`Remove ${isProductSection ? 'products' : 'blog posts'}`}
+              color="#d2691e"
+              onClick={() => setActiveSection(isProductSection ? 'delete-products' : 'delete-blogs')}
+            />
+          </>
+        )}
+      </div>
 
         <div style={{
           backgroundColor: 'white',
@@ -251,10 +275,14 @@ const Dashboard = () => {
         return <CreateProductForm />;
       case 'create-blog':
         return <CreateBlogForm />;
+      case 'create-career':
+        return <CreateCareerForm />;
       case 'view-products':
         return <ViewProducts />;
       case 'view-blogs':
         return <ViewBlogs />;
+      case 'view-careers':
+        return <ViewCareers />;
       case 'update-products':
         return <UpdateProducts />;
       case 'update-blogs':
@@ -267,7 +295,7 @@ const Dashboard = () => {
         return (
           <div style={{ textAlign: 'center', padding: '60px 20px' }}>
             <h3 style={{ color: '#2F5233', marginBottom: '15px' }}>
-              Welcome to {isProductSection ? 'Product' : 'Blog'} Management
+              Welcome to {activeSection === 'careers' ? 'Career' : isProductSection ? 'Product' : 'Blog'} Management
             </h3>
             <p style={{ color: '#666' }}>
               Select an action from the cards above to get started.
@@ -315,7 +343,8 @@ const CreateProductForm = () => {
     image: '',
     category: '',
     benefits: [''],
-    origin: ''
+    origin: '',
+    brochure: ''
   });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -397,7 +426,8 @@ const CreateProductForm = () => {
           price: 0,
           inStock: true,
           organic: true,
-          benefits: formData.benefits.filter(b => b.trim())
+          benefits: formData.benefits.filter(b => b.trim()),
+          brochure: formData.brochure
         })
       });
 
@@ -491,6 +521,36 @@ const CreateProductForm = () => {
           value={formData.origin}
           onChange={(value) => setFormData({...formData, origin: value})}
         />
+
+        <div>
+          <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Brochure (PDF)</label>
+          <input type="file" accept=".pdf" onChange={async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const formDataUpload = new FormData();
+            formDataUpload.append('file', file);
+            try {
+              const res = await fetch('/api/upload', {
+                method: 'POST',
+                body: formDataUpload
+              });
+              const data = await res.json();
+              if (data.success) {
+                setFormData({...formData, brochure: data.url});
+                setMessage('✓ Brochure uploaded successfully!');
+                setTimeout(() => setMessage(''), 2000);
+              }
+            } catch (err) {
+              setMessage('Error uploading brochure');
+            }
+          }} style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
+          {formData.brochure && (
+            <div style={{ marginTop: '10px', display: 'flex', gap: '10px', alignItems: 'center' }}>
+              <span style={{ color: '#2F5233', fontWeight: '600' }}>📄 Brochure uploaded</span>
+              <button type="button" onClick={() => setFormData({...formData, brochure: ''})} style={{ padding: '8px 12px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '600' }}>✕</button>
+            </div>
+          )}
+        </div>
 
         <div>
           <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>

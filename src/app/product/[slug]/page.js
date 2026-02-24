@@ -1,9 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
 const ProductDetailPage = () => {
+  const router = useRouter();
   const { slug } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -287,6 +288,7 @@ const ProductDetailPage = () => {
             alignItems: 'flex-start'
           }}>
             <button 
+              onClick={() => router.push('/contact')}
               style={{
                 padding: '16px 40px',
                 backgroundColor: '#2F5233',
@@ -311,32 +313,34 @@ const ProductDetailPage = () => {
               Add to Cart
             </button>
             
-            <a 
-              href="/product-brochure.pdf" 
-              download
-              style={{
-                padding: '16px 40px',
-                backgroundColor: 'transparent',
-                color: '#2F5233',
-                textDecoration: 'none',
-                borderRadius: '45px',
-                fontWeight: '600',
-                border: '2px solid #2F5233',
-                fontSize: '1rem',
-                transition: 'all 0.3s ease',
-                display: 'inline-block'
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.backgroundColor = '#2F5233';
-                e.target.style.color = 'white';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.backgroundColor = 'transparent';
-                e.target.style.color = '#2F5233';
-              }}
-            >
-              📄 Download Brochure
-            </a>
+            {product.brochure && (
+              <a 
+                href={product.brochure} 
+                download
+                style={{
+                  padding: '16px 40px',
+                  backgroundColor: 'transparent',
+                  color: '#2F5233',
+                  textDecoration: 'none',
+                  borderRadius: '45px',
+                  fontWeight: '600',
+                  border: '2px solid #2F5233',
+                  fontSize: '1rem',
+                  transition: 'all 0.3s ease',
+                  display: 'inline-block'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = '#2F5233';
+                  e.target.style.color = 'white';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = 'transparent';
+                  e.target.style.color = '#2F5233';
+                }}
+              >
+                📄 Download Brochure
+              </a>
+            )}
           </div>
         </div>
       </div>

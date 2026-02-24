@@ -124,12 +124,15 @@ const ProductsPage = () => {
                 {/* Product Image */}
                 <div style={{ height: '280px', overflow: 'hidden' }}>
                   <img 
-                    src={product.image || `/${(index % 3) + 1}.jpg`} 
+                    src={product.image && product.image.startsWith('http') ? product.image : (product.image || '/1.jpg')} 
                     alt={product.name}
                     style={{
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover'
+                    }}
+                    onError={(e) => {
+                      e.target.src = '/1.jpg';
                     }}
                   />
                 </div>
