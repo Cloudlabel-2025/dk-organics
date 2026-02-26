@@ -31,7 +31,7 @@ export default function Footer() {
             <h4 className="text-white mb-4">DK ORGANIC</h4>
             <p className="mb-3">
               DK Organics is committed to delivering pure, natural, and
-              chemical-free organic products directly from trusted farms.
+              chemical-free organic products directly from trusted farms
               Healthy soil. Honest food. Sustainable living.
             </p>
             <div className="d-flex pt-2">
