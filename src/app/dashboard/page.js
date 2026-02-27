@@ -395,9 +395,12 @@ const CreateProductForm = () => {
 
             const data = await res.json();
             if (data.success) {
-              setFormData({ ...formData, image: data.url });
+              setFormData(prev => ({ ...prev, image: data.url }));
               setMessage('✓ Image uploaded successfully!');
               setTimeout(() => setMessage(''), 2000);
+            } else {
+              setMessage(`Error: ${data.message || 'Upload failed'}`);
+              console.error('Upload failed:', data);
             }
             setUploading(false);
           }, 'image/jpeg', 0.8);
@@ -417,8 +420,26 @@ const CreateProductForm = () => {
     setLoading(true);
     setMessage('');
 
-    if (!formData.name.trim() || !formData.slug.trim()) {
-      setMessage('Error: Name and slug are required');
+    if (uploading) {
+      setMessage('Error: Please wait for media upload to finish');
+      setLoading(false);
+      return;
+    }
+
+    const requiredFields = {
+      name: 'Product Name',
+      slug: 'Slug',
+      description: 'Description',
+      image: 'Product Image',
+      category: 'Category'
+    };
+
+    const missing = Object.entries(requiredFields)
+      .filter(([key]) => !formData[key]?.trim())
+      .map(([, label]) => label);
+
+    if (missing.length > 0) {
+      setMessage(`Error: Missing required fields: ${missing.join(', ')}`);
       setLoading(false);
       return;
     }
@@ -506,7 +527,7 @@ const CreateProductForm = () => {
         />
 
         <div>
-          <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Image</label>
+          <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Image (Required)</label>
           <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploading} style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
           {formData.image && (
             <div style={{ marginTop: '10px', display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
@@ -522,6 +543,7 @@ const CreateProductForm = () => {
             label="Category"
             value={formData.category}
             onChange={(value) => setFormData({ ...formData, category: value })}
+            required
           />
         </div>
 
@@ -550,7 +572,7 @@ const CreateProductForm = () => {
                 });
                 const data = await res.json();
                 if (data.success) {
-                  setFormData({ ...formData, brochure: data.url });
+                  setFormData(prev => ({ ...prev, brochure: data.url }));
                   setMessage('✓ Brochure uploaded successfully!');
                   setTimeout(() => setMessage(''), 2000);
                 } else {
