@@ -54,7 +54,7 @@ const Dashboard = () => {
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#FCFAF2' }}>
-      
+
       {isMobile && (
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -89,7 +89,7 @@ const Dashboard = () => {
         zIndex: 999,
         overflowY: 'auto'
       }}>
-        
+
         <div style={{ padding: '0 30px', marginBottom: '40px' }}>
           <h1 style={{ color: 'white', fontSize: isMobile ? '1.5rem' : '1.8rem', fontWeight: 'bold', marginBottom: '10px' }}>
             Admin Dashboard
@@ -100,7 +100,7 @@ const Dashboard = () => {
         </div>
 
         <nav>
-          <div 
+          <div
             onClick={() => {
               setActiveSection('products');
               if (isMobile) setSidebarOpen(false);
@@ -118,8 +118,8 @@ const Dashboard = () => {
           >
             Product Management
           </div>
-          
-          <div 
+
+          <div
             onClick={() => {
               setActiveSection('blogs');
               if (isMobile) setSidebarOpen(false);
@@ -138,7 +138,7 @@ const Dashboard = () => {
             Blog Management
           </div>
 
-          <div 
+          <div
             onClick={() => {
               setActiveSection('careers');
               if (isMobile) setSidebarOpen(false);
@@ -191,7 +191,7 @@ const Dashboard = () => {
       </div>
 
       <div style={{ marginLeft: isMobile ? 0 : '280px', flex: 1, padding: isMobile ? '80px 20px 20px' : '40px', width: isMobile ? '100%' : 'auto' }}>
-        
+
         <div style={{ marginBottom: '40px' }}>
           <h2 style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#2F5233', marginBottom: '10px' }}>
             {activeSection === 'careers' ? 'Career Management' : isProductSection ? 'Product Management' : 'Blog Management'}
@@ -200,46 +200,46 @@ const Dashboard = () => {
             {activeSection === 'careers' ? 'Manage job postings' : isProductSection ? 'Manage your organic product catalog' : 'Create and manage blog content'}
           </p>
         </div>
-        
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(250px, 1fr))',
-        gap: '25px',
-        marginBottom: '40px'
-      }}>
-        
-        <ActionCard
-          title="Create New"
-          description={`Add new ${activeSection === 'careers' ? 'career posting' : isProductSection ? 'product' : 'blog post'}`}
-          color="#8AB440"
-          onClick={() => setActiveSection(activeSection === 'careers' ? 'create-career' : isProductSection ? 'create-product' : 'create-blog')}
-        />
-        
-        <ActionCard
-          title="View All"
-          description={`Browse all ${activeSection === 'careers' ? 'career postings' : isProductSection ? 'products' : 'blog posts'}`}
-          color="#2F5233"
-          onClick={() => setActiveSection(activeSection === 'careers' ? 'view-careers' : isProductSection ? 'view-products' : 'view-blogs')}
-        />
-        
-        {(isProductSection || activeSection === 'blogs') && (
-          <>
-            <ActionCard
-              title="Update"
-              description={`Edit existing ${isProductSection ? 'products' : 'blog posts'}`}
-              color="#6b8e23"
-              onClick={() => setActiveSection(isProductSection ? 'update-products' : 'update-blogs')}
-            />
-            
-            <ActionCard
-              title="Delete"
-              description={`Remove ${isProductSection ? 'products' : 'blog posts'}`}
-              color="#d2691e"
-              onClick={() => setActiveSection(isProductSection ? 'delete-products' : 'delete-blogs')}
-            />
-          </>
-        )}
-      </div>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(250px, 1fr))',
+          gap: '25px',
+          marginBottom: '40px'
+        }}>
+
+          <ActionCard
+            title="Create New"
+            description={`Add new ${activeSection === 'careers' ? 'career posting' : isProductSection ? 'product' : 'blog post'}`}
+            color="#8AB440"
+            onClick={() => setActiveSection(activeSection === 'careers' ? 'create-career' : isProductSection ? 'create-product' : 'create-blog')}
+          />
+
+          <ActionCard
+            title="View All"
+            description={`Browse all ${activeSection === 'careers' ? 'career postings' : isProductSection ? 'products' : 'blog posts'}`}
+            color="#2F5233"
+            onClick={() => setActiveSection(activeSection === 'careers' ? 'view-careers' : isProductSection ? 'view-products' : 'view-blogs')}
+          />
+
+          {(isProductSection || activeSection === 'blogs') && (
+            <>
+              <ActionCard
+                title="Update"
+                description={`Edit existing ${isProductSection ? 'products' : 'blog posts'}`}
+                color="#6b8e23"
+                onClick={() => setActiveSection(isProductSection ? 'update-products' : 'update-blogs')}
+              />
+
+              <ActionCard
+                title="Delete"
+                description={`Remove ${isProductSection ? 'products' : 'blog posts'}`}
+                color="#d2691e"
+                onClick={() => setActiveSection(isProductSection ? 'delete-products' : 'delete-blogs')}
+              />
+            </>
+          )}
+        </div>
 
         <div style={{
           backgroundColor: 'white',
@@ -270,7 +270,7 @@ const Dashboard = () => {
   );
 
   function renderContent() {
-    switch(activeSection) {
+    switch (activeSection) {
       case 'create-product':
         return <CreateProductForm />;
       case 'create-blog':
@@ -395,7 +395,7 @@ const CreateProductForm = () => {
 
             const data = await res.json();
             if (data.success) {
-              setFormData({...formData, image: data.url});
+              setFormData({ ...formData, image: data.url });
               setMessage('✓ Image uploaded successfully!');
               setTimeout(() => setMessage(''), 2000);
             }
@@ -417,12 +417,20 @@ const CreateProductForm = () => {
     setLoading(true);
     setMessage('');
 
+    if (!formData.name.trim() || !formData.slug.trim()) {
+      setMessage('Error: Name and slug are required');
+      setLoading(false);
+      return;
+    }
+
     try {
       const res = await fetch('/api/productpage', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
+          name: formData.name.trim(),
+          slug: formData.slug.trim().toLowerCase().replace(/\s+/g, '-'),
           price: 0,
           inStock: true,
           organic: true,
@@ -456,7 +464,7 @@ const CreateProductForm = () => {
   return (
     <div>
       <h3 style={{ color: '#2F5233', marginBottom: '30px', fontSize: '1.8rem' }}>Create New Product</h3>
-      
+
       {message && (
         <div style={{
           padding: '12px 20px',
@@ -476,50 +484,50 @@ const CreateProductForm = () => {
             label="Product Name"
             value={formData.name}
             onChange={(value) => {
-              setFormData({...formData, name: value, slug: value.toLowerCase().replace(/\s+/g, '-')});
+              setFormData({ ...formData, name: value, slug: value.toLowerCase().replace(/\s+/g, '-') });
             }}
             required
           />
           <FormField
             label="Slug"
             value={formData.slug}
-            onChange={(value) => setFormData({...formData, slug: value})}
+            onChange={(value) => setFormData({ ...formData, slug: value })}
             required
           />
         </div>
-        
+
         <FormField
           label="Description"
           value={formData.description}
-          onChange={(value) => setFormData({...formData, description: value})}
+          onChange={(value) => setFormData({ ...formData, description: value })}
           multiline
           required
         />
-        
+
         <div>
           <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Image</label>
           <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploading} style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
           {formData.image && (
             <div style={{ marginTop: '10px', display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
               <img src={formData.image} alt="preview" style={{ maxWidth: '150px', borderRadius: '8px' }} />
-              <button type="button" onClick={() => setFormData({...formData, image: ''})} style={{ padding: '8px 12px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', height: 'fit-content' }}>✕</button>
+              <button type="button" onClick={() => setFormData({ ...formData, image: '' })} style={{ padding: '8px 12px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', height: 'fit-content' }}>✕</button>
             </div>
           )}
           {formData.image && <p style={{ marginTop: '8px', fontSize: '0.9rem', color: '#666', wordBreak: 'break-all' }}>{formData.image}</p>}
         </div>
-        
+
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
           <FormField
             label="Category"
             value={formData.category}
-            onChange={(value) => setFormData({...formData, category: value})}
+            onChange={(value) => setFormData({ ...formData, category: value })}
           />
         </div>
-        
+
         <FormField
           label="Origin"
           value={formData.origin}
-          onChange={(value) => setFormData({...formData, origin: value})}
+          onChange={(value) => setFormData({ ...formData, origin: value })}
         />
 
         <div>
@@ -536,7 +544,7 @@ const CreateProductForm = () => {
               });
               const data = await res.json();
               if (data.success) {
-                setFormData({...formData, brochure: data.url});
+                setFormData({ ...formData, brochure: data.url });
                 setMessage('✓ Brochure uploaded successfully!');
                 setTimeout(() => setMessage(''), 2000);
               }
@@ -547,7 +555,7 @@ const CreateProductForm = () => {
           {formData.brochure && (
             <div style={{ marginTop: '10px', display: 'flex', gap: '10px', alignItems: 'center' }}>
               <span style={{ color: '#2F5233', fontWeight: '600' }}>📄 Brochure uploaded</span>
-              <button type="button" onClick={() => setFormData({...formData, brochure: ''})} style={{ padding: '8px 12px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '600' }}>✕</button>
+              <button type="button" onClick={() => setFormData({ ...formData, brochure: '' })} style={{ padding: '8px 12px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '600' }}>✕</button>
             </div>
           )}
         </div>
@@ -564,7 +572,7 @@ const CreateProductForm = () => {
                 onChange={(e) => {
                   const newBenefits = [...formData.benefits];
                   newBenefits[index] = e.target.value;
-                  setFormData({...formData, benefits: newBenefits});
+                  setFormData({ ...formData, benefits: newBenefits });
                 }}
                 style={{
                   flex: 1,
@@ -578,7 +586,7 @@ const CreateProductForm = () => {
               {index === formData.benefits.length - 1 && (
                 <button
                   type="button"
-                  onClick={() => setFormData({...formData, benefits: [...formData.benefits, '']})}
+                  onClick={() => setFormData({ ...formData, benefits: [...formData.benefits, ''] })}
                   style={{
                     padding: '12px 20px',
                     backgroundColor: '#8AB440',
@@ -644,7 +652,7 @@ const CreateBlogForm = () => {
 
       const data = await res.json();
       if (data.success) {
-        setFormData({...formData, coverImage: data.url});
+        setFormData({ ...formData, coverImage: data.url });
         setMessage('✓ Image uploaded successfully!');
         setTimeout(() => setMessage(''), 2000);
       }
@@ -661,11 +669,21 @@ const CreateBlogForm = () => {
     setLoading(true);
     setMessage('');
 
+    if (!formData.title.trim() || !formData.slug.trim() || !formData.content.trim()) {
+      setMessage('Error: Title, slug and content are required');
+      setLoading(false);
+      return;
+    }
+
     try {
       const res = await fetch('/api/blogpage', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          ...formData,
+          title: formData.title.trim(),
+          slug: formData.slug.trim().toLowerCase().replace(/\s+/g, '-')
+        })
       });
 
       const data = await res.json();
@@ -690,7 +708,7 @@ const CreateBlogForm = () => {
   return (
     <div>
       <h3 style={{ color: '#2F5233', marginBottom: '30px', fontSize: '1.8rem' }}>Create New Blog Post</h3>
-      
+
       {message && (
         <div style={{
           padding: '12px 20px',
@@ -710,34 +728,34 @@ const CreateBlogForm = () => {
             label="Blog Title"
             value={formData.title}
             onChange={(value) => {
-              setFormData({...formData, title: value, slug: value.toLowerCase().replace(/\s+/g, '-')});
+              setFormData({ ...formData, title: value, slug: value.toLowerCase().replace(/\s+/g, '-') });
             }}
             required
           />
           <FormField
             label="Slug"
             value={formData.slug}
-            onChange={(value) => setFormData({...formData, slug: value})}
+            onChange={(value) => setFormData({ ...formData, slug: value })}
             required
           />
         </div>
-        
+
         <div>
           <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Cover Image</label>
           <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploading} style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
           {formData.coverImage && (
             <div style={{ marginTop: '10px', display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
               <img src={formData.coverImage} alt="preview" style={{ maxWidth: '150px', borderRadius: '8px' }} />
-              <button type="button" onClick={() => setFormData({...formData, coverImage: ''})} style={{ padding: '8px 12px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', height: 'fit-content' }}>✕</button>
+              <button type="button" onClick={() => setFormData({ ...formData, coverImage: '' })} style={{ padding: '8px 12px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', height: 'fit-content' }}>✕</button>
             </div>
           )}
           {formData.coverImage && <p style={{ marginTop: '8px', fontSize: '0.9rem', color: '#666', wordBreak: 'break-all' }}>{formData.coverImage}</p>}
         </div>
-        
+
         <FormField
           label="Content"
           value={formData.content}
-          onChange={(value) => setFormData({...formData, content: value})}
+          onChange={(value) => setFormData({ ...formData, content: value })}
           multiline
           rows={8}
           required
@@ -805,8 +823,8 @@ const ViewProducts = () => {
             alignItems: 'center',
             flexDirection: 'row'
           }}>
-            <img 
-              src={product.image || '/1.jpg'} 
+            <img
+              src={product.image || '/1.jpg'}
               alt={product.name}
               style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '10px', flexShrink: 0 }}
             />
@@ -864,8 +882,8 @@ const ViewBlogs = () => {
             alignItems: 'center',
             flexDirection: 'row'
           }}>
-            <img 
-              src={blog.coverImage || '/blog-default.jpg'} 
+            <img
+              src={blog.coverImage || '/blog-default.jpg'}
               alt={blog.title}
               style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '10px', flexShrink: 0 }}
             />

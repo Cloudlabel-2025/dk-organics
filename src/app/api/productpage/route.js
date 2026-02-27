@@ -2,6 +2,8 @@ import { connectDB } from "../../lib/mongodb";
 import Product from "../../models/productpage";
 import { NextResponse } from "next/server";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     if (!process.env.MONGODB_URI) {
@@ -23,7 +25,7 @@ export async function POST(request) {
     }
     await connectDB();
     const data = await request.json();
-    
+
     if (!data.name || !data.slug) {
       return NextResponse.json({ success: false, error: "Name and slug required" }, { status: 400 });
     }
