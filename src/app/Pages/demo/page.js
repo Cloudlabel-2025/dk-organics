@@ -83,7 +83,7 @@ export default function UsersPage() {
           />
           <input
             type="email"
-            placeholder="Email Address"
+            placeholder="email address"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             style={{ padding: "10px", borderRadius: "4px", border: "1px solid #ccc" }}
