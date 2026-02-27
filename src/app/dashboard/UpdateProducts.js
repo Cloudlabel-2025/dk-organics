@@ -42,9 +42,11 @@ export const UpdateProducts = () => {
 
       const data = await res.json();
       if (data.success) {
-        setEditData({...editData, image: data.url});
+        setEditData(prev => ({ ...prev, image: data.url }));
         setMessage('✓ Image uploaded successfully!');
         setTimeout(() => setMessage(''), 2000);
+      } else {
+        setMessage('Error: ' + (data.message || 'Upload failed'));
       }
     } catch (err) {
       setMessage('Error uploading image');
@@ -70,9 +72,11 @@ export const UpdateProducts = () => {
 
       const data = await res.json();
       if (data.success) {
-        setEditData({...editData, brochure: data.url});
+        setEditData(prev => ({ ...prev, brochure: data.url }));
         setMessage('✓ Brochure uploaded successfully!');
         setTimeout(() => setMessage(''), 2000);
+      } else {
+        setMessage('Error: ' + (data.message || 'Upload failed'));
       }
     } catch (err) {
       setMessage('Error uploading brochure');
@@ -84,7 +88,7 @@ export const UpdateProducts = () => {
 
   const handleEdit = (product) => {
     setEditingId(product._id);
-    setEditData({...product});
+    setEditData({ ...product });
     setMessage('');
   };
 
@@ -95,9 +99,9 @@ export const UpdateProducts = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(editData)
       });
-      
+
       const result = await res.json();
-      
+
       if (res.ok && result.success) {
         setProducts(products.map(p => p._id === editData._id ? result.data : p));
         setMessage('✓ Product updated successfully!');
@@ -117,7 +121,7 @@ export const UpdateProducts = () => {
     try {
       const res = await fetch(`/api/productpage/${id}`, { method: 'DELETE' });
       const result = await res.json();
-      
+
       if (res.ok && result.success) {
         setProducts(products.filter(p => p._id !== id));
         setMessage('✓ Product deleted successfully!');
@@ -136,7 +140,7 @@ export const UpdateProducts = () => {
   return (
     <div>
       <h3 style={{ color: '#2F5233', marginBottom: '30px', fontSize: '1.8rem' }}>Update Products</h3>
-      
+
       {message && (
         <div style={{
           padding: '12px 20px',
@@ -164,11 +168,11 @@ export const UpdateProducts = () => {
               <div style={{ display: 'grid', gap: '15px' }}>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Name</label>
-                  <input type="text" value={editData.name} onChange={(e) => setEditData({...editData, name: e.target.value})} placeholder="Name" style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
+                  <input type="text" value={editData.name} onChange={(e) => setEditData({ ...editData, name: e.target.value })} placeholder="Name" style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
                 </div>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Description</label>
-                  <textarea value={editData.description} onChange={(e) => setEditData({...editData, description: e.target.value})} placeholder="Description" style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px', minHeight: '80px' }} />
+                  <textarea value={editData.description} onChange={(e) => setEditData({ ...editData, description: e.target.value })} placeholder="Description" style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px', minHeight: '80px' }} />
                 </div>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Image</label>
@@ -177,7 +181,7 @@ export const UpdateProducts = () => {
                 </div>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Category</label>
-                  <input type="text" value={editData.category} onChange={(e) => setEditData({...editData, category: e.target.value})} placeholder="Category" style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
+                  <input type="text" value={editData.category} onChange={(e) => setEditData({ ...editData, category: e.target.value })} placeholder="Category" style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
                 </div>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Brochure (PDF)</label>
@@ -185,7 +189,7 @@ export const UpdateProducts = () => {
                   {editData.brochure && (
                     <div style={{ marginTop: '10px', display: 'flex', gap: '10px', alignItems: 'center' }}>
                       <span style={{ color: '#2F5233', fontWeight: '600' }}>📄 Brochure uploaded</span>
-                      <button type="button" onClick={() => setEditData({...editData, brochure: ''})} style={{ padding: '5px 10px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '0.8rem' }}>Remove</button>
+                      <button type="button" onClick={() => setEditData({ ...editData, brochure: '' })} style={{ padding: '5px 10px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '0.8rem' }}>Remove</button>
                     </div>
                   )}
                 </div>

@@ -24,8 +24,9 @@ export async function GET(request, { params }) {
 export async function PUT(request, { params }) {
   try {
     await connectDB();
-    const { slug } = await params;
+    const { slug } = await params; // Here 'slug' is actually the ID from the URL
     const data = await request.json();
+    console.log(`PUT /api/blogpage/${slug} (ID update)`);
 
     const blog = await Blog.findByIdAndUpdate(slug, data, { new: true });
 
@@ -35,7 +36,7 @@ export async function PUT(request, { params }) {
 
     return NextResponse.json({ success: true, data: blog });
   } catch (err) {
-    console.error("PUT /api/blogpage/[id] ERROR:", err);
+    console.error("PUT /api/blogpage/[slug] ERROR:", err);
     return NextResponse.json({ success: false, error: "Failed to update blog post" }, { status: 500 });
   }
 }

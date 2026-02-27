@@ -579,7 +579,8 @@ const CreateProductForm = () => {
                   setMessage('Error: ' + (data.message || 'Upload failed'));
                 }
               } catch (err) {
-                setMessage('Error uploading brochure');
+                console.error('Frontend brochure upload error:', err);
+                setMessage('Error uploading brochure: ' + err.message);
               } finally {
                 setUploading(false);
               }
@@ -687,9 +688,11 @@ const CreateBlogForm = () => {
 
       const data = await res.json();
       if (data.success) {
-        setFormData({ ...formData, coverImage: data.url });
+        setFormData(prev => ({ ...prev, coverImage: data.url }));
         setMessage('✓ Image uploaded successfully!');
         setTimeout(() => setMessage(''), 2000);
+      } else {
+        setMessage('Error: ' + (data.message || 'Upload failed'));
       }
     } catch (err) {
       setMessage('Error uploading image');
@@ -731,10 +734,11 @@ const CreateBlogForm = () => {
           content: ''
         });
       } else {
-        setMessage('Error: ' + data.error);
+        setMessage('Error: ' + (data.error || 'Failed to create blog'));
       }
     } catch (err) {
       setMessage('Error creating blog post');
+      console.error('Blog creation error:', err);
     } finally {
       setLoading(false);
     }
@@ -798,20 +802,20 @@ const CreateBlogForm = () => {
 
         <button
           type="submit"
-          disabled={loading}
+          disabled={loading || uploading}
           style={{
             padding: '15px 30px',
-            backgroundColor: loading ? '#ccc' : '#2F5233',
+            backgroundColor: (loading || uploading) ? '#ccc' : '#2F5233',
             color: 'white',
             border: 'none',
             borderRadius: '15px',
             fontSize: '1.1rem',
             fontWeight: '600',
-            cursor: loading ? 'not-allowed' : 'pointer',
+            cursor: (loading || uploading) ? 'not-allowed' : 'pointer',
             marginTop: '20px'
           }}
         >
-          {loading ? 'Creating...' : 'Create Blog Post'}
+          {loading ? 'Creating...' : uploading ? 'Uploading...' : 'Create Blog Post'}
         </button>
       </form>
     </div>

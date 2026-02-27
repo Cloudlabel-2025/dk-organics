@@ -2,6 +2,8 @@ import { connectDB } from "../../lib/mongodb";
 import Career from "../../models/Career";
 import { NextResponse } from "next/server";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     await connectDB();
@@ -17,7 +19,7 @@ export async function POST(request) {
   try {
     await connectDB();
     const data = await request.json();
-    
+
     if (!data.title || !data.location || !data.type || !data.roleAndResponsibility || !data.gender) {
       return NextResponse.json({ success: false, error: "Title, location, type, role and responsibility, and gender required" }, { status: 400 });
     }

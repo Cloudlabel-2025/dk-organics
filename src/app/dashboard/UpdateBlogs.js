@@ -42,9 +42,11 @@ export const UpdateBlogs = () => {
 
       const data = await res.json();
       if (data.success) {
-        setEditData({...editData, coverImage: data.url});
+        setEditData(prev => ({ ...prev, coverImage: data.url }));
         setMessage('✓ Image uploaded successfully!');
         setTimeout(() => setMessage(''), 2000);
+      } else {
+        setMessage('Error: ' + (data.message || 'Upload failed'));
       }
     } catch (err) {
       setMessage('Error uploading image');
@@ -56,7 +58,7 @@ export const UpdateBlogs = () => {
 
   const handleEdit = (blog) => {
     setEditingId(blog._id);
-    setEditData({...blog});
+    setEditData({ ...blog });
     setMessage('');
   };
 
@@ -67,9 +69,9 @@ export const UpdateBlogs = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(editData)
       });
-      
+
       const result = await res.json();
-      
+
       if (res.ok && result.success) {
         setBlogs(blogs.map(b => b._id === editData._id ? result.data : b));
         setMessage('✓ Blog post updated successfully!');
@@ -89,7 +91,7 @@ export const UpdateBlogs = () => {
     try {
       const res = await fetch(`/api/blogpage/${id}`, { method: 'DELETE' });
       const result = await res.json();
-      
+
       if (res.ok && result.success) {
         setBlogs(blogs.filter(b => b._id !== id));
         setMessage('✓ Blog post deleted successfully!');
@@ -108,7 +110,7 @@ export const UpdateBlogs = () => {
   return (
     <div>
       <h3 style={{ color: '#2F5233', marginBottom: '30px', fontSize: '1.8rem' }}>Update Blog Posts</h3>
-      
+
       {message && (
         <div style={{
           padding: '12px 20px',
@@ -136,11 +138,11 @@ export const UpdateBlogs = () => {
               <div style={{ display: 'grid', gap: '15px' }}>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Title</label>
-                  <input type="text" value={editData.title} onChange={(e) => setEditData({...editData, title: e.target.value})} placeholder="Title" style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
+                  <input type="text" value={editData.title} onChange={(e) => setEditData({ ...editData, title: e.target.value })} placeholder="Title" style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
                 </div>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Slug</label>
-                  <input type="text" value={editData.slug} onChange={(e) => setEditData({...editData, slug: e.target.value})} placeholder="Slug" style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
+                  <input type="text" value={editData.slug} onChange={(e) => setEditData({ ...editData, slug: e.target.value })} placeholder="Slug" style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
                 </div>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Cover Image</label>
@@ -149,7 +151,7 @@ export const UpdateBlogs = () => {
                 </div>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Content</label>
-                  <textarea value={editData.content} onChange={(e) => setEditData({...editData, content: e.target.value})} placeholder="Content" style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px', minHeight: '120px' }} />
+                  <textarea value={editData.content} onChange={(e) => setEditData({ ...editData, content: e.target.value })} placeholder="Content" style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px', minHeight: '120px' }} />
                 </div>
                 <div style={{ display: 'flex', gap: '10px' }}>
                   <button onClick={handleSave} style={{ padding: '10px 20px', backgroundColor: '#8AB440', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '600' }}>Save</button>

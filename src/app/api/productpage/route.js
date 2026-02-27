@@ -36,7 +36,11 @@ export async function POST(request) {
     }
     await connectDB();
     const data = await request.json();
-    console.log("Received product data:", { ...data, image: data.image ? "PRESENT" : "MISSING" });
+    console.log("Received product data:", {
+      ...data,
+      image: data.image ? "PRESENT" : "MISSING",
+      brochure: data.brochure ? "PRESENT" : "MISSING"
+    });
 
     // Validate required fields explicitly to provide better error messages
     const requiredFields = ['name', 'slug', 'description', 'image', 'category'];
