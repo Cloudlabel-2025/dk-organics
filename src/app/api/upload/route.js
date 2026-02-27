@@ -20,14 +20,26 @@ export async function POST(request) {
     const buffer = Buffer.from(bytes);
 
     const result = await new Promise((resolve, reject) => {
+      console.log("Sending file to Cloudinary...");
+      const uploadOptions = {
+        folder: 'dkorganics',
+        resource_type: 'auto',
+      };
+
+      if (process.env.CLOUDINARY_UPLOAD_PRESET) {
+        uploadOptions.upload_preset = process.env.CLOUDINARY_UPLOAD_PRESET;
+      }
+
       const uploadStream = cloudinary.uploader.upload_stream(
-        {
-          folder: 'dkorganics',
-          resource_type: 'auto',
-        },
+        uploadOptions,
         (error, result) => {
-          if (error) reject(error);
-          else resolve(result);
+          if (error) {
+            console.error("Cloudinary upload error:", error);
+            reject(error);
+          } else {
+            console.log("Cloudinary upload success");
+            resolve(result);
+          }
         }
       );
 
@@ -39,7 +51,11 @@ export async function POST(request) {
       url: result.secure_url,
     });
   } catch (err) {
-    console.error('Upload error:', err.message);
-    return NextResponse.json({ success: false, error: 'Upload failed' }, { status: 500 });
+    console.error('Upload API error:', err);
+    return NextResponse.json({
+      success: false,
+      error: 'Upload failed',
+      message: err.message
+    }, { status: 500 });
   }
 }

@@ -449,7 +449,8 @@ const CreateProductForm = () => {
           image: '',
           category: '',
           benefits: [''],
-          origin: ''
+          origin: '',
+          brochure: ''
         });
       } else {
         setMessage('Error: ' + data.error);
@@ -532,26 +533,38 @@ const CreateProductForm = () => {
 
         <div>
           <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Brochure (PDF)</label>
-          <input type="file" accept=".pdf" onChange={async (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-            const formDataUpload = new FormData();
-            formDataUpload.append('file', file);
-            try {
-              const res = await fetch('/api/upload', {
-                method: 'POST',
-                body: formDataUpload
-              });
-              const data = await res.json();
-              if (data.success) {
-                setFormData({ ...formData, brochure: data.url });
-                setMessage('✓ Brochure uploaded successfully!');
-                setTimeout(() => setMessage(''), 2000);
+          <input
+            type="file"
+            accept=".pdf"
+            disabled={uploading}
+            onChange={async (e) => {
+              const file = e.target.files[0];
+              if (!file) return;
+              setUploading(true);
+              const formDataUpload = new FormData();
+              formDataUpload.append('file', file);
+              try {
+                const res = await fetch('/api/upload', {
+                  method: 'POST',
+                  body: formDataUpload
+                });
+                const data = await res.json();
+                if (data.success) {
+                  setFormData({ ...formData, brochure: data.url });
+                  setMessage('✓ Brochure uploaded successfully!');
+                  setTimeout(() => setMessage(''), 2000);
+                } else {
+                  setMessage('Error: ' + (data.message || 'Upload failed'));
+                }
+              } catch (err) {
+                setMessage('Error uploading brochure');
+              } finally {
+                setUploading(false);
               }
-            } catch (err) {
-              setMessage('Error uploading brochure');
-            }
-          }} style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
+            }}
+            style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }}
+          />
+          {uploading && <p style={{ color: '#666', fontSize: '0.85rem', marginTop: '5px' }}>Uploading file...</p>}
           {formData.brochure && (
             <div style={{ marginTop: '10px', display: 'flex', gap: '10px', alignItems: 'center' }}>
               <span style={{ color: '#2F5233', fontWeight: '600' }}>📄 Brochure uploaded</span>

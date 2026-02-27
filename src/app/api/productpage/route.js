@@ -29,20 +29,37 @@ export async function GET() {
 
 export async function POST(request) {
   try {
+    console.log("POST /api/productpage started");
     if (!process.env.MONGODB_URI) {
+      console.error("MONGODB_URI missing in POST");
       return NextResponse.json({ success: false, error: "Database not configured" }, { status: 500 });
     }
     await connectDB();
     const data = await request.json();
+    console.log("Received product data:", { ...data, image: data.image ? "PRESENT" : "MISSING" });
 
-    if (!data.name || !data.slug) {
-      return NextResponse.json({ success: false, error: "Name and slug required" }, { status: 400 });
+    // Validate required fields explicitly to provide better error messages
+    const requiredFields = ['name', 'slug', 'description', 'image', 'category'];
+    const missingFields = requiredFields.filter(field => !data[field]);
+
+    if (missingFields.length > 0) {
+      console.warn("Missing required fields:", missingFields);
+      return NextResponse.json({
+        success: false,
+        error: `Missing required fields: ${missingFields.join(', ')}`
+      }, { status: 400 });
     }
 
     const newProduct = await Product.create(data);
+    console.log("Product created successfully:", newProduct._id);
     return NextResponse.json({ success: true, data: newProduct }, { status: 201 });
   } catch (err) {
-    console.error("POST /api/productpage ERROR:", err.message);
-    return NextResponse.json({ success: false, error: "Failed to create product", details: err.message }, { status: 500 });
+    console.error("POST /api/productpage ERROR:", err);
+    return NextResponse.json({
+      success: false,
+      error: "Failed to create product",
+      message: err.message,
+      details: err.errors // Mongoose validation errors
+    }, { status: 500 });
   }
 }
