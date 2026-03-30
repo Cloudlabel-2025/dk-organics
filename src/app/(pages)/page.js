@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Accordion, Row, Col, Card, Carousel , Container } from "react-bootstrap";
+import { Accordion, Row, Col, Card, Carousel, Container } from "react-bootstrap";
 import Image from "next/image";
 
 
@@ -30,99 +30,99 @@ export default function Home() {
       {/* HERO SECTION */}
       <section>
         <Carousel controls={false} indicators={true}>
-        <Carousel.Item>
-          {/* Main Hero Container - Added overflow hidden to handle the large image bleed */}
-          <div 
-            className="hero-bg d-flex align-items-center" 
-            style={{ 
-              minHeight: "80vh", 
-              width: "100%", 
-              overflow: "hidden", 
-              backgroundColor: "#fff",
-             
-            }}
-          >
-            <Container fluid className="p-0">
-              <Row className="align-items-center g-0">
-                
-                {/* LEFT CONTENT */}
-                <Col xs={6} md={6} className="ps-5">
-                  <div className="animate__animated animate__fadeInLeft ms-lg-5">
-                    <h1 
-                      className="fw-bold mb-2 text-dark" 
-                      style={{ fontSize: "calc(1rem + 2.5vw)", lineHeight: "1.1", color: "#333" }}
-                    >
-                      Organic Farming <br /> Healthy Living
-                    </h1>
-                    <p 
-                      className="text-muted mb-4" 
-                      style={{ fontSize: "calc(0.7rem + 0.3vw)" }}
-                    >
-                      Pure, responsibly grown organic produce...
-                    </p>
-                    <button 
-                      className="btn btn-success px-4 py-2"
-                      style={{ backgroundColor: "#053b0d", border: "none", borderRadius: "5px" }}
-                    >
-                      Explore
-                    </button>
-                  </div>
-                </Col>
+          <Carousel.Item>
+            {/* Main Hero Container - Added overflow hidden to handle the large image bleed */}
+            <div
+              className="hero-bg d-flex align-items-center"
+              style={{
+                minHeight: "80vh",
+                width: "100%",
+                overflow: "hidden",
+                backgroundColor: "#fff",
 
-                {/* RIGHT IMAGE COMPOSITION */}
-                <Col xs={6} md={6} className="position-relative d-flex justify-content-end">
-                  {/* This wrapper mimics the "half-circle" look from your image */}
-                  <div 
-                    className="position-relative" 
-                    style={{ 
-                      width: "100%", // Scaled up to allow it to "bleed" off the right side
-                      transform: "translateX(10%)", // Shifts the image slightly off-screen like the reference
-                    }}
-                  >
-                    {/* BACKGROUND PLATTER (13.png) */}
-                    <div className="position-relative">
-                      <Image
-                        src="/13.png"
-                        alt="Platter Background"
-                        width={700}
-                        height={700}
-                        priority
-                        className="img-fluid"
-                        style={{ width: "90%", height: "auto", display: "block" }}
-                      />
+              }}
+            >
+              <Container fluid className="p-0">
+                <Row className="align-items-center g-0">
 
-                      {/* OVERLAY GARLIC (11.png) */}
-                      <div
-                        className="position-absolute"
-                        style={{
-                          width: "80%",   // Proportionate to the platter
-                          bottom: "10%",   // Adjusted to sit inside the basket look
-                          left: "12.5%",
-                          zIndex: 5,
-                        }}
+                  {/* LEFT CONTENT */}
+                  <Col xs={6} md={6} className="ps-5">
+                    <div className="animate__animated animate__fadeInLeft ms-lg-5">
+                      <h1
+                        className="fw-bold mb-2 text-dark"
+                        style={{ fontSize: "calc(1rem + 2.5vw)", lineHeight: "1.1", color: "#333" }}
                       >
+                        Organic Farming <br /> Healthy Living
+                      </h1>
+                      <p
+                        className="text-muted mb-4"
+                        style={{ fontSize: "calc(0.7rem + 0.3vw)" }}
+                      >
+                        Pure, responsibly grown organic produce...
+                      </p>
+                      <button
+                        className="btn btn-success px-4 py-2"
+                        style={{ backgroundColor: "#053b0d", border: "none", borderRadius: "5px" }}
+                      >
+                        Explore
+                      </button>
+                    </div>
+                  </Col>
+
+                  {/* RIGHT IMAGE COMPOSITION */}
+                  <Col xs={6} md={6} className="position-relative d-flex justify-content-end">
+                    {/* This wrapper mimics the "half-circle" look from your image */}
+                    <div
+                      className="position-relative"
+                      style={{
+                        width: "100%", // Scaled up to allow it to "bleed" off the right side
+                        transform: "translateX(10%)", // Shifts the image slightly off-screen like the reference
+                      }}
+                    >
+                      {/* BACKGROUND PLATTER (13.png) */}
+                      <div className="position-relative">
                         <Image
-                          src="/11.png"
-                          alt="Peeled Garlic"
-                          width={600}
-                          height={600}
+                          src="/13.png"
+                          alt="Platter Background"
+                          width={700}
+                          height={700}
                           priority
-                          className="img-fluid animate__animated animate__fadeInRight"
-                          style={{ width: "100%", height: "auto" }}
+                          className="img-fluid"
+                          style={{ width: "90%", height: "auto", display: "block" }}
                         />
+
+                        {/* OVERLAY GARLIC (11.png) */}
+                        <div
+                          className="position-absolute"
+                          style={{
+                            width: "80%",   // Proportionate to the platter
+                            bottom: "10%",   // Adjusted to sit inside the basket look
+                            left: "12.5%",
+                            zIndex: 5,
+                          }}
+                        >
+                          <Image
+                            src="/11.png"
+                            alt="Peeled Garlic"
+                            width={600}
+                            height={600}
+                            priority
+                            className="img-fluid animate__animated animate__fadeInRight"
+                            style={{ width: "100%", height: "auto" }}
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Col>
+                  </Col>
 
-              </Row>
-            </Container>
-          </div>
-        </Carousel.Item>
-      </Carousel>
+                </Row>
+              </Container>
+            </div>
+          </Carousel.Item>
+        </Carousel>
       </section>
       {/* WHO WE ARE SECTION */}
-      <section className="curve-section" style={{ marginTop: "-1px" , paddingTop: "40px"}}>
+      <section className="curve-section" style={{ marginTop: "-1px", paddingTop: "40px" }}>
         <div className="curve-blob blob-a"></div>
         <div className="curve-blob blob-b"></div>
         <div className="curve-blob blob-c"></div>
@@ -253,79 +253,79 @@ export default function Home() {
         </div>
       </section>
       {/* SECTION 2: OUR ESSENCE */}
-    <section className="essence-section">
-  <div className="container">
+      <section className="essence-section">
+        <div className="container">
 
-    {/* ===== BLOCK 1 ===== */}
-    <div className="row align-items-center mb-5">
-      <div className="col-lg-6 position-relative">
-        <div className="pebble-image-container">
-          <div className="pebble-bg-back"></div>
-          <img
-            src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=1000"
-            alt="Organic Farming"
-            className="pebble-img"
-          />
+          {/* ===== BLOCK 1 ===== */}
+          <div className="row align-items-center mb-5">
+            <div className="col-lg-6 position-relative">
+              <div className="pebble-image-container">
+                <div className="pebble-bg-back"></div>
+                <img
+                  src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=1000"
+                  alt="Organic Farming"
+                  className="pebble-img"
+                />
+              </div>
+            </div>
+
+            <div className="col-lg-6 ps-lg-5 mt-4 mt-lg-0">
+              <span className="organic-tag">Pure & Conscious</span>
+              <h2 className="essence-title">From the Earth,<br />For Your Soul</h2>
+              <p className="essence-desc">
+                Garlic Sakthi is a revolutionary garlic extract formulation enriched with nutrients, amino acids, and bioactive compounds that strengthen plants.
+              </p>
+            </div>
+          </div>
+
+          {/* ===== BLOCK 2 (REVERSED DESKTOP) ===== */}
+          <div className="row align-items-center mb-5">
+            <div className="col-lg-6 ps-lg-5 mt-4 mt-lg-0 order-2 order-lg-1">
+              <span className="organic-tag">Pure & Conscious</span>
+              <h2 className="essence-title">From the Earth,<br />For Your Soul</h2>
+              <p className="essence-desc">
+                Our solutions improve root development, nutrient uptake, soil health, and overall plant vigor.
+              </p>
+            </div>
+
+            <div className="col-lg-6 position-relative order-1 order-lg-2">
+              <div className="pebble-image-container">
+                <div className="pebble-bg-back"></div>
+                <img
+                  src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=1000"
+                  alt="Organic Farming"
+                  className="pebble-img"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* ===== BLOCK 3 ===== */}
+          <div className="row align-items-center">
+            <div className="col-lg-6 position-relative">
+              <div className="pebble-image-container">
+                <div className="pebble-bg-back"></div>
+                <img
+                  src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=1000"
+                  alt="Organic Farming"
+                  className="pebble-img"
+                />
+              </div>
+            </div>
+
+            <div className="col-lg-6 ps-lg-5 mt-4 mt-lg-0">
+              <span className="organic-tag">Pure & Conscious</span>
+              <h2 className="essence-title">From the Earth,<br />For Your Soul</h2>
+              <p className="essence-desc">
+                Mealy Out effectively controls pests while remaining safe for crops and beneficial organisms.
+              </p>
+            </div>
+          </div>
+
         </div>
-      </div>
+      </section>
 
-      <div className="col-lg-6 ps-lg-5 mt-4 mt-lg-0">
-        <span className="organic-tag">Pure & Conscious</span>
-        <h2 className="essence-title">From the Earth,<br />For Your Soul</h2>
-        <p className="essence-desc">
-          Garlic Sakthi is a revolutionary garlic extract formulation enriched with nutrients, amino acids, and bioactive compounds that strengthen plants.
-        </p>
-      </div>
-    </div>
 
-    {/* ===== BLOCK 2 (REVERSED DESKTOP) ===== */}
-    <div className="row align-items-center mb-5">
-      <div className="col-lg-6 ps-lg-5 mt-4 mt-lg-0 order-2 order-lg-1">
-        <span className="organic-tag">Pure & Conscious</span>
-        <h2 className="essence-title">From the Earth,<br />For Your Soul</h2>
-        <p className="essence-desc">
-          Our solutions improve root development, nutrient uptake, soil health, and overall plant vigor.
-        </p>
-      </div>
-
-      <div className="col-lg-6 position-relative order-1 order-lg-2">
-        <div className="pebble-image-container">
-          <div className="pebble-bg-back"></div>
-          <img
-            src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=1000"
-            alt="Organic Farming"
-            className="pebble-img"
-          />
-        </div>
-      </div>
-    </div>
-
-    {/* ===== BLOCK 3 ===== */}
-    <div className="row align-items-center">
-      <div className="col-lg-6 position-relative">
-        <div className="pebble-image-container">
-          <div className="pebble-bg-back"></div>
-          <img
-            src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=1000"
-            alt="Organic Farming"
-            className="pebble-img"
-          />
-        </div>
-      </div>
-
-      <div className="col-lg-6 ps-lg-5 mt-4 mt-lg-0">
-        <span className="organic-tag">Pure & Conscious</span>
-        <h2 className="essence-title">From the Earth,<br />For Your Soul</h2>
-        <p className="essence-desc">
-          Mealy Out effectively controls pests while remaining safe for crops and beneficial organisms.
-        </p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-      
     </>
   );
 }

@@ -20,9 +20,14 @@ export async function POST(request) {
       return NextResponse.json({ success: false, error: "Invalid credentials" }, { status: 401 });
     }
 
+    if (!process.env.JWT_SECRET) {
+      console.error("FATAL ERROR: JWT_SECRET is not defined in environment variables.");
+      return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
+    }
+
     const token = jwt.sign(
       { userId: user._id, role: user.role },
-      process.env.JWT_SECRET || 'fallback-secret',
+      process.env.JWT_SECRET,
       { expiresIn: '7d' }
     );
 

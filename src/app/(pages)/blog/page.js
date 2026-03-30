@@ -140,34 +140,56 @@ const BlogPage = () => {
               blogs.map((blog) => (
                 <div key={blog._id} style={{
                   backgroundColor: 'white',
-                  borderRadius: '0px 0px 70px 0px',
+                  borderRadius: '16px',
+                  border: '1px solid #eef2e6',
                   overflow: 'hidden',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
                   position: 'relative',
                   display: 'flex',
                   flexDirection: 'column',
-                  transition: 'transform 0.3s ease'
+                  transition: 'all 0.3s ease'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-5px)';
+                  e.currentTarget.style.boxShadow = '0 15px 40px rgba(47, 82, 51, 0.15)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.05)';
                 }}>
                   
                   {/* Blog Image */}
-                  <div style={{ height: '200px', position: 'relative' }}>
+                  <div style={{ 
+                    position: 'relative', 
+                    width: '100%', 
+                    paddingTop: '60%', /* 5:3 Aspect Ratio */
+                    overflow: 'hidden',
+                    backgroundColor: '#f9fbf7'
+                  }}>
                     <Image 
                       src={blog.coverImage || '/1.jpg'} 
                       alt={blog.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      style={{ objectFit: 'cover' }}
+                      style={{ 
+                        objectFit: 'contain',
+                        transition: 'transform 0.5s ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.target.style.transform = 'scale(1.05)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.transform = 'scale(1)';
+                      }}
+                      onError={(e) => {
+                        e.currentTarget.src = '/1.jpg';
+                        e.currentTarget.srcset = '';
+                      }}
                     />
                   </div>
 
                   {/* Blog Content */}
-                  <div style={{ padding: '20px', paddingBottom: '70px', flexGrow: 1 }}>
+                  <div style={{ padding: '25px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
                     <div style={{ 
                       display: 'flex', 
                       justifyContent: 'space-between', 
@@ -175,74 +197,59 @@ const BlogPage = () => {
                       alignItems: 'center'
                     }}>
                       <small style={{ 
-                        color: '#8AB440', 
-                        fontWeight: 'bold',
-                        backgroundColor: '#E8F5E8',
+                        color: 'white', 
+                        fontWeight: '600',
+                        backgroundColor: 'rgba(138, 180, 64, 0.9)',
                         padding: '4px 12px',
                         borderRadius: '15px',
-                        fontSize: '0.8rem'
+                        fontSize: '0.75rem',
+                        letterSpacing: '0.5px'
                       }}>ORGANIC</small>
-                      <small style={{ color: '#666' }}>
+                      <small style={{ color: '#888', fontSize: '0.85rem' }}>
                         {new Date(blog.createdAt).toLocaleDateString()}
                       </small>
                     </div>
                     <h5 style={{ 
-                      fontWeight: 'bold', 
-                      color: '#2F5233', 
+                      fontWeight: '700', 
+                      color: '#2d3e2d', 
                       marginBottom: '12px',
-                      fontSize: '1.1rem',
-                      lineHeight: '1.3',
-                      minHeight: '2.6rem',
+                      fontSize: '1.2rem',
+                      lineHeight: '1.4',
                       display: '-webkit-box',
                       WebkitLineClamp: 2,
                       WebkitBoxOrient: 'vertical',
                       overflow: 'hidden'
                     }}>{blog.title}</h5>
                     <p style={{ 
-                      color: '#666', 
-                      fontSize: '0.9rem',
-                      lineHeight: '1.4',
+                      color: '#5f6f52', 
+                      fontSize: '0.95rem',
+                      lineHeight: '1.5',
                       display: '-webkit-box',
                       WebkitLineClamp: 2,
                       WebkitBoxOrient: 'vertical',
                       overflow: 'hidden',
-                      minHeight: '2.8rem'
+                      marginBottom: '20px'
                     }}>
-                      {blog.content?.substring(0, 120)}...
+                      {blog.content ? blog.content.substring(0, 120) + '...' : ''}
                     </p>
+                    
+                    <div style={{ marginTop: 'auto', paddingTop: '15px', borderTop: '1px solid #eef2e6' }}>
+                      <Link href={`/blog/${blog.slug}`} style={{
+                        color: '#8AB440',
+                        fontWeight: '600',
+                        textDecoration: 'none',
+                        display: 'flex',
+                        alignItems: 'center',
+                        fontSize: '0.95rem',
+                        transition: 'color 0.2s ease'
+                      }}
+                      onMouseEnter={(e) => e.target.style.color = '#2F5233'}
+                      onMouseLeave={(e) => e.target.style.color = '#8AB440'}
+                      >
+                        Read Article <span style={{ marginLeft: '5px' }}>→</span>
+                      </Link>
+                    </div>
                   </div>
-
-                  {/* Action Button */}
-                  <Link href={`/blog/${blog.slug}`}>
-                    <button style={{
-                      position: 'absolute',
-                      bottom: 0,
-                      right: 0,
-                      width: '50px',
-                      height: '50px',
-                      backgroundColor: '#8AB440',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '50px 0px 70px 0px',
-                      fontSize: '20px',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      boxShadow: '0 4px 15px rgba(138, 180, 64, 0.3)',
-                      transition: 'all 0.3s ease'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.target.style.backgroundColor = '#7a9f39';
-                      e.target.style.transform = 'scale(1.1)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.backgroundColor = '#8AB440';
-                      e.target.style.transform = 'scale(1)';
-                    }}>
-                      →
-                    </button>
-                  </Link>
                 </div>
               ))
             ) : (

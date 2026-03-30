@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 const ProductDetailPage = () => {
   const router = useRouter();
@@ -188,23 +189,26 @@ const ProductDetailPage = () => {
         }}>
           <div style={{
             backgroundColor: '#FFFFFF',
-            borderRadius: '30px',
-            padding: '30px',
-            boxShadow: '0 15px 40px rgba(0,0,0,0.08)',
+            borderRadius: '24px',
+            border: '1px solid #eef2e6',
+            boxShadow: '0 15px 40px rgba(0,0,0,0.06)',
             width: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '450px'
+            position: 'relative',
+            overflow: 'hidden',
+            aspectRatio: '1 / 1'
           }}>
-            <img 
-              src={product.image || '/1.jpg'} 
+            <Image 
+              src={product.image && product.image.startsWith('http') ? product.image : (product.image || '/1.jpg')} 
               alt={product.name}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              priority
               style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'contain',
-                borderRadius: '20px'
+                objectFit: 'contain'
+              }}
+              onError={(e) => {
+                e.currentTarget.src = '/1.jpg';
+                e.currentTarget.srcset = '';
               }}
             />
           </div>

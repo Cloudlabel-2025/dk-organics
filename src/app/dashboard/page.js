@@ -78,24 +78,24 @@ const Dashboard = () => {
 
       <div style={{
         width: isMobile ? '100%' : '280px',
-        backgroundColor: '#1a3d1e',
+        backgroundColor: 'white',
         position: isMobile ? 'fixed' : 'fixed',
         height: '100vh',
         left: isMobile && !sidebarOpen ? '-100%' : 0,
         top: 0,
         padding: '30px 0',
-        boxShadow: '4px 0 15px rgba(0,0,0,0.1)',
+        boxShadow: '4px 0 25px rgba(0,0,0,0.05)',
         transition: 'left 0.3s ease',
         zIndex: 999,
         overflowY: 'auto'
       }}>
 
         <div style={{ padding: '0 30px', marginBottom: '40px' }}>
-          <h1 style={{ color: 'white', fontSize: isMobile ? '1.5rem' : '1.8rem', fontWeight: 'bold', marginBottom: '10px' }}>
-            Admin Dashboard
+          <h1 style={{ color: '#2F5233', fontSize: isMobile ? '1.5rem' : '1.8rem', fontWeight: 'bold', marginBottom: '10px' }}>
+            DK Organics
           </h1>
-          <p style={{ color: '#a8e6a8', fontSize: '0.9rem' }}>
-            Welcome, {user?.username}
+          <p style={{ color: '#8AB440', fontSize: '0.9rem', fontWeight: '600' }}>
+            Admin Portal • {user?.username}
           </p>
         </div>
 
@@ -107,16 +107,16 @@ const Dashboard = () => {
             }}
             style={{
               padding: '15px 30px',
-              color: isProductSection ? '#1a3d1e' : 'white',
-              backgroundColor: isProductSection ? '#8AB440' : 'transparent',
+              color: isProductSection ? '#2F5233' : '#666',
+              backgroundColor: isProductSection ? '#f5f9f0' : 'transparent',
               cursor: 'pointer',
-              borderLeft: isProductSection ? '4px solid #FCFAF2' : '4px solid transparent',
+              borderRight: isProductSection ? '4px solid #8AB440' : '4px solid transparent',
               transition: 'all 0.3s ease',
               fontSize: '1.1rem',
-              fontWeight: '600'
+              fontWeight: isProductSection ? '700' : '500'
             }}
           >
-            Product Management
+            <span style={{ marginRight: '10px' }}>📦</span> Products
           </div>
 
           <div
@@ -126,16 +126,16 @@ const Dashboard = () => {
             }}
             style={{
               padding: '15px 30px',
-              color: activeSection === 'blogs' || activeSection.includes('blog') ? '#1a3d1e' : 'white',
-              backgroundColor: activeSection === 'blogs' || activeSection.includes('blog') ? '#8AB440' : 'transparent',
+              color: activeSection === 'blogs' || activeSection.includes('blog') ? '#2F5233' : '#666',
+              backgroundColor: activeSection === 'blogs' || activeSection.includes('blog') ? '#f5f9f0' : 'transparent',
               cursor: 'pointer',
-              borderLeft: activeSection === 'blogs' || activeSection.includes('blog') ? '4px solid #FCFAF2' : '4px solid transparent',
+              borderRight: activeSection === 'blogs' || activeSection.includes('blog') ? '4px solid #8AB440' : '4px solid transparent',
               transition: 'all 0.3s ease',
               fontSize: '1.1rem',
-              fontWeight: '600'
+              fontWeight: activeSection === 'blogs' || activeSection.includes('blog') ? '700' : '500'
             }}
           >
-            Blog Management
+            <span style={{ marginRight: '10px' }}>📝</span> Blog
           </div>
 
           <div
@@ -145,16 +145,16 @@ const Dashboard = () => {
             }}
             style={{
               padding: '15px 30px',
-              color: activeSection === 'careers' || activeSection.includes('career') ? '#1a3d1e' : 'white',
-              backgroundColor: activeSection === 'careers' || activeSection.includes('career') ? '#8AB440' : 'transparent',
+              color: activeSection === 'careers' || activeSection.includes('career') ? '#2F5233' : '#666',
+              backgroundColor: activeSection === 'careers' || activeSection.includes('career') ? '#f5f9f0' : 'transparent',
               cursor: 'pointer',
-              borderLeft: activeSection === 'careers' || activeSection.includes('career') ? '4px solid #FCFAF2' : '4px solid transparent',
+              borderRight: activeSection === 'careers' || activeSection.includes('career') ? '4px solid #8AB440' : '4px solid transparent',
               transition: 'all 0.3s ease',
               fontSize: '1.1rem',
-              fontWeight: '600'
+              fontWeight: activeSection === 'careers' || activeSection.includes('career') ? '700' : '500'
             }}
           >
-            Career Management
+            <span style={{ marginRight: '10px' }}>💼</span> Careers
           </div>
         </nav>
 
@@ -168,24 +168,24 @@ const Dashboard = () => {
               width: '100%',
               padding: '12px',
               backgroundColor: 'transparent',
-              color: '#8AB440',
-              border: '2px solid #8AB440',
-              borderRadius: '25px',
+              color: '#dc3545',
+              border: '1px solid #dc3545',
+              borderRadius: '8px',
               cursor: 'pointer',
               fontSize: '1rem',
               fontWeight: '600',
               transition: 'all 0.3s ease'
             }}
             onMouseEnter={(e) => {
-              e.target.style.backgroundColor = '#8AB440';
+              e.target.style.backgroundColor = '#dc3545';
               e.target.style.color = 'white';
             }}
             onMouseLeave={(e) => {
               e.target.style.backgroundColor = 'transparent';
-              e.target.style.color = '#8AB440';
+              e.target.style.color = '#dc3545';
             }}
           >
-            Logout
+            Sign Out
           </button>
         </div>
       </div>
@@ -223,29 +223,21 @@ const Dashboard = () => {
           />
 
           {(isProductSection || activeSection === 'blogs') && (
-            <>
-              <ActionCard
-                title="Update"
-                description={`Edit existing ${isProductSection ? 'products' : 'blog posts'}`}
-                color="#6b8e23"
-                onClick={() => setActiveSection(isProductSection ? 'update-products' : 'update-blogs')}
-              />
-
-              <ActionCard
-                title="Delete"
-                description={`Remove ${isProductSection ? 'products' : 'blog posts'}`}
-                color="#d2691e"
-                onClick={() => setActiveSection(isProductSection ? 'delete-products' : 'delete-blogs')}
-              />
-            </>
+            <ActionCard
+              title="Manage"
+              description={`Edit or remove existing ${isProductSection ? 'products' : 'blog posts'}`}
+              color="#DC7633"
+              onClick={() => setActiveSection(isProductSection ? 'manage-products' : 'manage-blogs')}
+            />
           )}
         </div>
 
         <div style={{
           backgroundColor: 'white',
-          borderRadius: '25px',
+          borderRadius: '16px',
           padding: isMobile ? '25px 15px' : '40px',
-          boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
+          boxShadow: '0 10px 40px rgba(0,0,0,0.05)',
+          border: '1px solid #eef2e6',
           minHeight: '400px'
         }}>
           {renderContent()}
@@ -283,12 +275,12 @@ const Dashboard = () => {
         return <ViewBlogs />;
       case 'view-careers':
         return <ViewCareers />;
+      case 'manage-products':
       case 'update-products':
-        return <UpdateProducts />;
-      case 'update-blogs':
-        return <UpdateBlogs />;
       case 'delete-products':
         return <UpdateProducts />;
+      case 'manage-blogs':
+      case 'update-blogs':
       case 'delete-blogs':
         return <UpdateBlogs />;
       default:
@@ -528,7 +520,7 @@ const CreateProductForm = () => {
 
         <div>
           <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Image (Required)</label>
-          <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploading} style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
+          <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploading} style={{ width: '100%', padding: '10px', border: '1px solid #eef2e6', borderRadius: '8px', outline: 'none' }} />
           {formData.image && (
             <div style={{ marginTop: '10px', display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
               <img src={formData.image} alt="preview" style={{ maxWidth: '150px', borderRadius: '8px' }} />
@@ -585,7 +577,7 @@ const CreateProductForm = () => {
                 setUploading(false);
               }
             }}
-            style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }}
+            style={{ width: '100%', padding: '10px', border: '1px solid #eef2e6', borderRadius: '8px', outline: 'none' }}
           />
           {uploading && <p style={{ color: '#666', fontSize: '0.85rem', marginTop: '5px' }}>Uploading file...</p>}
           {formData.brochure && (
@@ -613,10 +605,14 @@ const CreateProductForm = () => {
                 style={{
                   flex: 1,
                   padding: '12px',
-                  border: '2px solid #E8F5E8',
-                  borderRadius: '10px',
-                  fontSize: '1rem'
+                  border: '1px solid #eef2e6',
+                  borderRadius: '8px',
+                  fontSize: '1rem',
+                  outline: 'none',
+                  transition: 'border-color 0.3s'
                 }}
+                onFocus={(e) => e.target.style.borderColor = '#8AB440'}
+                onBlur={(e) => e.target.style.borderColor = '#eef2e6'}
                 placeholder={`Benefit ${index + 1}`}
               />
               {index === formData.benefits.length - 1 && (
@@ -644,15 +640,18 @@ const CreateProductForm = () => {
           disabled={loading}
           style={{
             padding: '15px 30px',
-            backgroundColor: loading ? '#ccc' : '#2F5233',
+            backgroundColor: loading ? '#ccc' : '#8AB440',
             color: 'white',
             border: 'none',
-            borderRadius: '15px',
+            borderRadius: '8px',
             fontSize: '1.1rem',
             fontWeight: '600',
             cursor: loading ? 'not-allowed' : 'pointer',
+            transition: 'background-color 0.3s',
             marginTop: '20px'
           }}
+          onMouseEnter={(e) => { if (!loading) e.target.style.backgroundColor = '#7a9f39'; }}
+          onMouseLeave={(e) => { if (!loading) e.target.style.backgroundColor = '#8AB440'; }}
         >
           {loading ? 'Creating...' : 'Create Product'}
         </button>
@@ -781,7 +780,7 @@ const CreateBlogForm = () => {
 
         <div>
           <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Cover Image</label>
-          <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploading} style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
+          <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploading} style={{ width: '100%', padding: '10px', border: '1px solid #eef2e6', borderRadius: '8px', outline: 'none' }} />
           {formData.coverImage && (
             <div style={{ marginTop: '10px', display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
               <img src={formData.coverImage} alt="preview" style={{ maxWidth: '150px', borderRadius: '8px' }} />
@@ -805,15 +804,18 @@ const CreateBlogForm = () => {
           disabled={loading || uploading}
           style={{
             padding: '15px 30px',
-            backgroundColor: (loading || uploading) ? '#ccc' : '#2F5233',
+            backgroundColor: (loading || uploading) ? '#ccc' : '#8AB440',
             color: 'white',
             border: 'none',
-            borderRadius: '15px',
+            borderRadius: '8px',
             fontSize: '1.1rem',
             fontWeight: '600',
             cursor: (loading || uploading) ? 'not-allowed' : 'pointer',
+            transition: 'background-color 0.3s',
             marginTop: '20px'
           }}
+          onMouseEnter={(e) => { if (!(loading || uploading)) e.target.style.backgroundColor = '#7a9f39'; }}
+          onMouseLeave={(e) => { if (!(loading || uploading)) e.target.style.backgroundColor = '#8AB440'; }}
         >
           {loading ? 'Creating...' : uploading ? 'Uploading...' : 'Create Blog Post'}
         </button>
@@ -857,10 +859,12 @@ const ViewProducts = () => {
             display: 'flex',
             gap: '20px',
             padding: '20px',
-            border: '2px solid #E8F5E8',
-            borderRadius: '15px',
+            border: '1px solid #eef2e6',
+            boxShadow: '0 4px 15px rgba(0,0,0,0.02)',
+            borderRadius: '16px',
             alignItems: 'center',
-            flexDirection: 'row'
+            flexDirection: 'row',
+            backgroundColor: 'white'
           }}>
             <img
               src={product.image || '/1.jpg'}
@@ -916,10 +920,12 @@ const ViewBlogs = () => {
             display: 'flex',
             gap: '20px',
             padding: '20px',
-            border: '2px solid #E8F5E8',
-            borderRadius: '15px',
+            border: '1px solid #eef2e6',
+            boxShadow: '0 4px 15px rgba(0,0,0,0.02)',
+            borderRadius: '16px',
             alignItems: 'center',
-            flexDirection: 'row'
+            flexDirection: 'row',
+            backgroundColor: 'white'
           }}>
             <img
               src={blog.coverImage || '/blog-default.jpg'}
@@ -954,12 +960,16 @@ const FormField = ({ label, value, onChange, multiline, rows = 3, required, plac
         style={{
           width: '100%',
           padding: '12px',
-          border: '2px solid #E8F5E8',
-          borderRadius: '10px',
+          border: '1px solid #eef2e6',
+          borderRadius: '8px',
           fontSize: '1rem',
           resize: 'vertical',
-          fontFamily: 'inherit'
+          fontFamily: 'inherit',
+          outline: 'none',
+          transition: 'border-color 0.3s'
         }}
+        onFocus={(e) => e.target.style.borderColor = '#8AB440'}
+        onBlur={(e) => e.target.style.borderColor = '#eef2e6'}
         {...props}
       />
     ) : (
@@ -972,10 +982,14 @@ const FormField = ({ label, value, onChange, multiline, rows = 3, required, plac
         style={{
           width: '100%',
           padding: '12px',
-          border: '2px solid #E8F5E8',
-          borderRadius: '10px',
-          fontSize: '1rem'
+          border: '1px solid #eef2e6',
+          borderRadius: '8px',
+          fontSize: '1rem',
+          outline: 'none',
+          transition: 'border-color 0.3s'
         }}
+        onFocus={(e) => e.target.style.borderColor = '#8AB440'}
+        onBlur={(e) => e.target.style.borderColor = '#eef2e6'}
         {...props}
       />
     )}

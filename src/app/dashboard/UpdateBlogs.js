@@ -109,7 +109,7 @@ export const UpdateBlogs = () => {
 
   return (
     <div>
-      <h3 style={{ color: '#2F5233', marginBottom: '30px', fontSize: '1.8rem' }}>Update Blog Posts</h3>
+      <h3 style={{ color: '#2F5233', marginBottom: '30px', fontSize: '1.8rem' }}>Manage Blog Posts</h3>
 
       {message && (
         <div style={{
@@ -130,28 +130,30 @@ export const UpdateBlogs = () => {
             display: 'flex',
             gap: '20px',
             padding: '20px',
-            border: '2px solid #E8F5E8',
-            borderRadius: '15px',
+            border: '1px solid #eef2e6',
+            boxShadow: '0 4px 15px rgba(0,0,0,0.02)',
+            borderRadius: '16px',
+            backgroundColor: 'white',
             flexDirection: 'column'
           }}>
             {editingId === blog._id ? (
               <div style={{ display: 'grid', gap: '15px' }}>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Title</label>
-                  <input type="text" value={editData.title} onChange={(e) => setEditData({ ...editData, title: e.target.value })} placeholder="Title" style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
+                  <input type="text" value={editData.title} onChange={(e) => setEditData({ ...editData, title: e.target.value })} placeholder="Title" style={{ width: '100%', padding: '10px', border: '1px solid #eef2e6', borderRadius: '8px', outline: 'none' }} onFocus={(e) => e.target.style.borderColor = '#8AB440'} onBlur={(e) => e.target.style.borderColor = '#eef2e6'} />
                 </div>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Slug</label>
-                  <input type="text" value={editData.slug} onChange={(e) => setEditData({ ...editData, slug: e.target.value })} placeholder="Slug" style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
+                  <input type="text" value={editData.slug} onChange={(e) => setEditData({ ...editData, slug: e.target.value })} placeholder="Slug" style={{ width: '100%', padding: '10px', border: '1px solid #eef2e6', borderRadius: '8px', outline: 'none' }} onFocus={(e) => e.target.style.borderColor = '#8AB440'} onBlur={(e) => e.target.style.borderColor = '#eef2e6'} />
                 </div>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Cover Image</label>
-                  <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploading} style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
+                  <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploading} style={{ width: '100%', padding: '10px', border: '1px solid #eef2e6', borderRadius: '8px', outline: 'none' }} />
                   {editData.coverImage && <img src={editData.coverImage} alt="preview" style={{ marginTop: '10px', maxWidth: '150px', borderRadius: '8px' }} />}
                 </div>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Content</label>
-                  <textarea value={editData.content} onChange={(e) => setEditData({ ...editData, content: e.target.value })} placeholder="Content" style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px', minHeight: '120px' }} />
+                  <textarea value={editData.content} onChange={(e) => setEditData({ ...editData, content: e.target.value })} placeholder="Content" style={{ width: '100%', padding: '10px', border: '1px solid #eef2e6', borderRadius: '8px', minHeight: '120px', outline: 'none', resize: 'vertical' }} onFocus={(e) => e.target.style.borderColor = '#8AB440'} onBlur={(e) => e.target.style.borderColor = '#eef2e6'} />
                 </div>
                 <div style={{ display: 'flex', gap: '10px' }}>
                   <button onClick={handleSave} style={{ padding: '10px 20px', backgroundColor: '#8AB440', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '600' }}>Save</button>

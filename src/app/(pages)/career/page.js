@@ -85,20 +85,20 @@ const CareerPage = () => {
               careers.map((career) => (
                 <div key={career._id} style={{
                   backgroundColor: 'white',
-                  borderRadius: '30px',
+                  borderRadius: '16px',
                   padding: isMobile ? '25px' : '35px',
-                  boxShadow: '0 10px 30px rgba(138, 180, 64, 0.1)',
-                  border: '2px solid #8AB440',
+                  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.05)',
+                  border: '1px solid #eef2e6',
                   transition: 'all 0.3s ease',
                   cursor: 'pointer'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-8px)';
-                  e.currentTarget.style.boxShadow = '0 20px 50px rgba(138, 180, 64, 0.2)';
+                  e.currentTarget.style.boxShadow = '0 15px 40px rgba(138, 180, 64, 0.15)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 10px 30px rgba(138, 180, 64, 0.1)';
+                  e.currentTarget.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.05)';
                 }}>
                   
                   {/* Job Title */}
@@ -175,20 +175,22 @@ const CareerPage = () => {
                   <button onClick={() => router.push('/contact')} style={{
                     width: '100%',
                     padding: '12px',
-                    backgroundColor: '#2F5233',
+                    backgroundColor: '#8AB440',
                     color: 'white',
                     border: 'none',
-                    borderRadius: '20px',
+                    borderRadius: '8px',
                     fontSize: '1rem',
                     fontWeight: '600',
                     cursor: 'pointer',
                     transition: 'all 0.3s ease'
                   }}
                   onMouseEnter={(e) => {
-                    e.target.style.backgroundColor = '#1e3d22';
+                    e.target.style.backgroundColor = '#7a9f39';
+                    e.target.style.transform = 'scale(1.02)';
                   }}
                   onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = '#2F5233';
+                    e.target.style.backgroundColor = '#8AB440';
+                    e.target.style.transform = 'scale(1)';
                   }}>
                     Apply Now
                   </button>
@@ -200,8 +202,9 @@ const CareerPage = () => {
                 textAlign: 'center', 
                 padding: '80px 40px',
                 backgroundColor: 'white',
-                borderRadius: '30px',
-                border: '2px solid #8AB440'
+                borderRadius: '16px',
+                border: '1px solid #eef2e6',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.03)'
               }}>
                 <h3 style={{ color: '#8AB440', marginBottom: '15px', fontSize: '1.5rem' }}>No Positions Available</h3>
                 <p style={{ color: '#666', fontSize: '1.1rem' }}>Check back soon for new opportunities!</p>

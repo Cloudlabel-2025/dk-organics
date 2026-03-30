@@ -57,10 +57,10 @@ const LoginContent = () => {
 
   const formContainerStyle = {
     backgroundColor: 'white',
-    borderRadius: '25px',
+    borderRadius: '16px',
     padding: '50px 40px',
-    boxShadow: '0 15px 35px rgba(138, 180, 64, 0.1)',
-    border: '2px solid #8AB440',
+    boxShadow: '0 10px 40px rgba(0, 0, 0, 0.05)',
+    border: '1px solid #eef2e6',
     maxWidth: '450px',
     width: '100%',
     margin: 'auto'
@@ -117,14 +117,14 @@ const LoginContent = () => {
               style={{
                 width: '100%',
                 padding: '15px',
-                border: '2px solid #E8F5E8',
-                borderRadius: '12px',
+                border: '1px solid #eef2e6',
+                borderRadius: '8px',
                 fontSize: '1rem',
                 outline: 'none',
                 transition: 'border-color 0.3s'
               }}
               onFocus={(e) => e.target.style.borderColor = '#8AB440'}
-              onBlur={(e) => e.target.style.borderColor = '#E8F5E8'}
+              onBlur={(e) => e.target.style.borderColor = '#eef2e6'}
               required
             />
           </div>
@@ -140,14 +140,14 @@ const LoginContent = () => {
               style={{
                 width: '100%',
                 padding: '15px',
-                border: '2px solid #E8F5E8',
-                borderRadius: '12px',
+                border: '1px solid #eef2e6',
+                borderRadius: '8px',
                 fontSize: '1rem',
                 outline: 'none',
                 transition: 'border-color 0.3s'
               }}
               onFocus={(e) => e.target.style.borderColor = '#8AB440'}
-              onBlur={(e) => e.target.style.borderColor = '#E8F5E8'}
+              onBlur={(e) => e.target.style.borderColor = '#eef2e6'}
               required
             />
           </div>
@@ -158,48 +158,31 @@ const LoginContent = () => {
             style={{
               width: '100%',
               padding: '15px',
-              backgroundColor: loading ? '#ccc' : '#2F5233',
+              backgroundColor: loading ? '#ccc' : '#8AB440',
               color: 'white',
               border: 'none',
-              borderRadius: '25px',
+              borderRadius: '8px',
               fontSize: '1.1rem',
               fontWeight: '600',
               cursor: loading ? 'not-allowed' : 'pointer',
               transition: 'all 0.3s ease',
               marginBottom: '20px'
             }}
+            onMouseEnter={(e) => {
+              if (!loading) e.target.style.backgroundColor = '#7a9f39';
+            }}
+            onMouseLeave={(e) => {
+              if (!loading) e.target.style.backgroundColor = '#8AB440';
+            }}
           >
             {loading ? 'Signing In...' : 'Sign In'}
           </button>
         </form>
 
-        <div style={{ textAlign: 'center' }}>
-          <p style={{ color: '#666', marginBottom: '15px' }}>
-            Don't have an account?
+        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+          <p style={{ color: '#8AB440', fontSize: '0.9rem', fontWeight: '500' }}>
+            Secure Owner Portal
           </p>
-          <Link href="/signup">
-            <button style={{
-              backgroundColor: 'transparent',
-              color: '#8AB440',
-              border: '2px solid #8AB440',
-              padding: '12px 30px',
-              borderRadius: '25px',
-              fontSize: '1rem',
-              fontWeight: '600',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease'
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.backgroundColor = '#8AB440';
-              e.target.style.color = 'white';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.backgroundColor = 'transparent';
-              e.target.style.color = '#8AB440';
-            }}>
-              Sign Up Here
-            </button>
-          </Link>
         </div>
       </div>
     </div>

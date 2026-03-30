@@ -102,10 +102,14 @@ export const CreateCareerForm = () => {
               style={{
                 width: '100%',
                 padding: '12px',
-                border: '2px solid #E8F5E8',
-                borderRadius: '10px',
-                fontSize: '1rem'
+                border: '1px solid #eef2e6',
+                borderRadius: '8px',
+                fontSize: '1rem',
+                outline: 'none',
+                transition: 'border-color 0.3s'
               }}
+              onFocus={(e) => e.target.style.borderColor = '#8AB440'}
+              onBlur={(e) => e.target.style.borderColor = '#eef2e6'}
             >
               <option value="Any">Any</option>
               <option value="Male">Male</option>
@@ -153,15 +157,18 @@ export const CreateCareerForm = () => {
           disabled={loading}
           style={{
             padding: '15px 30px',
-            backgroundColor: loading ? '#ccc' : '#2F5233',
+            backgroundColor: loading ? '#ccc' : '#8AB440',
             color: 'white',
             border: 'none',
-            borderRadius: '15px',
+            borderRadius: '8px',
             fontSize: '1.1rem',
             fontWeight: '600',
             cursor: loading ? 'not-allowed' : 'pointer',
+            transition: 'background-color 0.3s',
             marginTop: '20px'
           }}
+          onMouseEnter={(e) => { if (!loading) e.target.style.backgroundColor = '#7a9f39'; }}
+          onMouseLeave={(e) => { if (!loading) e.target.style.backgroundColor = '#8AB440'; }}
         >
           {loading ? 'Creating...' : 'Create Career Posting'}
         </button>
@@ -237,9 +244,10 @@ export const ViewCareers = () => {
           careers.map(career => (
             <div key={career._id} style={{
               padding: '25px',
-              border: '2px solid #E8F5E8',
-              borderRadius: '15px',
-              backgroundColor: '#fafafa'
+              border: '1px solid #eef2e6',
+              boxShadow: '0 4px 15px rgba(0,0,0,0.02)',
+              borderRadius: '16px',
+              backgroundColor: 'white'
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '15px' }}>
                 <div>
@@ -314,12 +322,16 @@ const FormField = ({ label, value, onChange, multiline, rows = 3, required, plac
         style={{
           width: '100%',
           padding: '12px',
-          border: '2px solid #E8F5E8',
-          borderRadius: '10px',
+          border: '1px solid #eef2e6',
+          borderRadius: '8px',
           fontSize: '1rem',
           resize: 'vertical',
-          fontFamily: 'inherit'
+          fontFamily: 'inherit',
+          outline: 'none',
+          transition: 'border-color 0.3s'
         }}
+        onFocus={(e) => e.target.style.borderColor = '#8AB440'}
+        onBlur={(e) => e.target.style.borderColor = '#eef2e6'}
         {...props}
       />
     ) : (
@@ -332,10 +344,14 @@ const FormField = ({ label, value, onChange, multiline, rows = 3, required, plac
         style={{
           width: '100%',
           padding: '12px',
-          border: '2px solid #E8F5E8',
-          borderRadius: '10px',
-          fontSize: '1rem'
+          border: '1px solid #eef2e6',
+          borderRadius: '8px',
+          fontSize: '1rem',
+          outline: 'none',
+          transition: 'border-color 0.3s'
         }}
+        onFocus={(e) => e.target.style.borderColor = '#8AB440'}
+        onBlur={(e) => e.target.style.borderColor = '#eef2e6'}
         {...props}
       />
     )}

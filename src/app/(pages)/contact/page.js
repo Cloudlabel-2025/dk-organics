@@ -69,7 +69,7 @@ export default function Contact() {
       <section className="py-5 bg-light" style={{ backgroundColor: "#f8fdf9" }}>
         <div className="container text-center py-5">
           <h6 className="text-success fw-bold text-uppercase">Contact Us</h6>
-          <h1 className="display-4 fw-bold mb-4">Cultivating a Healthier </h1>
+          <h1 className="display-4 fw-bold mb-4">Cultivating a Healthier Future</h1>
           <p className="lead text-muted mx-auto" style={{ maxWidth: "700px" }}>
             We believe that food should be grown the way nature intended. No chemicals,
             no shortcuts—just pure, honest farming.

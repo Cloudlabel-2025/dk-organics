@@ -9,39 +9,39 @@ import Image from "next/image";
 export default function ServicesPage() {
   const services = [
     {
-      title: "Web Development",
-      desc: "High-performance, SEO-ready websites built with modern frameworks like Next.js and React.",
+      title: "Soil Health & Nutrition",
+      desc: "Comprehensive testing and natural soil revitalization programs tailored to your fields.",
       points: [
-        "Fast loading & mobile-first",
-        "SEO-optimized structure",
-        "Scalable architecture",
+        "Microbial soil balancing",
+        "Organic matter enrichment",
+        "Long-term fertility planning",
       ],
     },
     {
-      title: "E-Commerce Solutions",
-      desc: "Conversion-focused online stores that are easy to manage and built to scale.",
+      title: "Pest Management Advisory",
+      desc: "Garlic-based, natural pest control strategies that protect yields without harming the ecosystem.",
       points: [
-        "Secure payment integration",
-        "Product & order management",
-        "Optimized checkout flow",
+        "Biological pest disruption",
+        "Safe for beneficial insects",
+        "Chemical-free spray schedules",
       ],
     },
     {
-      title: "UI / UX Design",
-      desc: "Clean, user-focused designs that turn visitors into customers.",
+      title: "Crop Yield Optimization",
+      desc: "Bio-stimulant consulting to naturally improve root development, vigor, and nutrient uptake.",
       points: [
-        "Wireframes & prototypes",
-        "User-journey optimization",
-        "Modern, minimal layouts",
+        "Amino-acid formulations",
+        "Drip irrigation efficiency",
+        "Post-harvest soil recovery",
       ],
     },
     {
-      title: "API & Backend Development",
-      desc: "Reliable backend systems and APIs powered by Node.js and MongoDB.",
+      title: "Sustainable Farm Transition",
+      desc: "Expert guidance for farmers transitioning from conventional to certified organic farming.",
       points: [
-        "REST APIs",
-        "Database design",
-        "Secure authentication",
+        "Compliance & auditing prep",
+        "Sustainable practice coaching",
+        "Yield drop mitigation",
       ],
     },
   ];
@@ -53,16 +53,18 @@ export default function ServicesPage() {
           <Image src="/1.jpg" alt="Farm" fill priority style={{ objectFit: 'cover' }} className="opacity-25" />
         </div>
         <div className="container position-relative py-5 text-center" style={{ zIndex: 1 }}>
-          <h1 className="display-4 fw-bold text-dark">Organic Database</h1>
-          <p className="lead">Manage and view your farm research records.</p>
+          <h1 className="display-4 fw-bold text-dark">Our Services</h1>
+          <p className="lead fw-bold text-dark" style={{ textShadow: '0 2px 10px rgba(255,255,255,0.8)' }}>
+            Expert agricultural consulting and natural crop solutions.
+          </p>
         </div>
       </section>
       {/* Hero Section */}
       <section className="bg-dark text-white py-5 text-center">
         <Container>
-          <h1 className="fw-bold">Our Services</h1>
+          <h1 className="fw-bold">Agricultural Partnerships</h1>
           <p className="mt-3">
-            We build fast, scalable, and business-ready digital products.
+            We build sustainable, high-yield, and environment-friendly farming systems.
           </p>
         </Container>
       </section>
@@ -95,9 +97,9 @@ export default function ServicesPage() {
       {/* CTA Section */}
       <section className="bg-light py-5 text-center">
         <Container>
-          <h2 className="fw-bold">Have a Project in Mind?</h2>
+          <h2 className="fw-bold">Ready to Transform Your Yield?</h2>
           <p className="mb-4">
-            Let's discuss your idea and turn it into a real product.
+            Let's discuss your farming goals and introduce pure, organic practices to your fields.
           </p>
           <Button variant="dark" size="lg">
             Contact Us

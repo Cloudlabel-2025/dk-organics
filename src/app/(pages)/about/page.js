@@ -34,22 +34,7 @@ const AboutPage = () => {
             <div className="col-lg-6 ps-lg-5">
               <h2 className="fw-bold mb-4">Rooted in Tradition, Grown with Care</h2>
               <p className="text-muted mb-4">
-                Our journey started with a simple clove of garlic and a dream to restore the
-                soil. Today, we manage over 200 acres of certified organic land, ensuring
-                that every vegetable that reaches your table is packed with nutrients
-                and free from synthetic pesticides.
-                Our journey started with a simple clove of garlic and a dream to restore the
-                soil. Today, we manage over 200 acres of certified organic land, ensuring
-                that every vegetable that reaches your table is packed with nutrients
-                and free from synthetic pesticides.<br/>
-                Our journey started with a simple clove of garlic and a dream to restore the
-                soil. Today, we manage over 200 acres of certified organic land, ensuring
-                that every vegetable that reaches your table is packed with nutrients
-                and free from synthetic pesticides.
-                Our journey started with a simple clove of garlic and a dream to restore the
-                soil. Today, we manage over 200 acres of certified organic land, ensuring
-                that every vegetable that reaches your table is packed with nutrients
-                and free from synthetic pesticides.
+                Our journey started with a deep respect for the earth and a vision to restore soil health naturally. Today, we manage extensive certified organic acreage, ensuring that every crop and protective solution we develop is packed with natural vitality and completely free from synthetic pesticides.
               </p>
               <div className="row g-4">
                 <div className="col-sm-6">
@@ -81,10 +66,10 @@ const AboutPage = () => {
             <div className="col-lg-4 col-md-6">
               <div className="card border-0 shadow-sm p-4 h-100">
                 <div className="mx-auto mb-3" style={{ width: "140px", height: "140px", position: "relative" }}>
-                  <Image src="/1.jpg" fill className="rounded-circle border border-3 border-light shadow-sm" style={{ objectFit: "cover" }} alt="Product" />
+                  <Image src="/1.jpg" fill className="rounded-circle border border-3 border-light shadow-sm" style={{ objectFit: "cover" }} alt="Garlic Sakthi" />
                 </div>
-                <h5 className="fw-bold mb-1">Garlic</h5>
-                <p className="text-success small fw-bold text-uppercase">Premium Quality</p>
+                <h5 className="fw-bold mb-1">Garlic Sakthi</h5>
+                <p className="text-success small fw-bold text-uppercase">Bio-Stimulant</p>
               </div>
             </div>
 
@@ -92,10 +77,10 @@ const AboutPage = () => {
             <div className="col-lg-4 col-md-6">
               <div className="card border-0 shadow-sm p-4 h-100">
                 <div className="mx-auto mb-3" style={{ width: "140px", height: "140px", position: "relative" }}>
-                  <Image src="/2.jpg" fill className="rounded-circle border border-3 border-light shadow-sm" style={{ objectFit: "cover" }} alt="Product" />
+                  <Image src="/2.jpg" fill className="rounded-circle border border-3 border-light shadow-sm" style={{ objectFit: "cover" }} alt="Mealy Out" />
                 </div>
-                <h5 className="fw-bold mb-1">Garlic</h5>
-                <p className="text-success small fw-bold text-uppercase">Organic Grade</p>
+                <h5 className="fw-bold mb-1">Mealy Out</h5>
+                <p className="text-success small fw-bold text-uppercase">Pest Control</p>
               </div>
             </div>
 
@@ -103,32 +88,10 @@ const AboutPage = () => {
             <div className="col-lg-4 col-md-6">
               <div className="card border-0 shadow-sm p-4 h-100">
                 <div className="mx-auto mb-3" style={{ width: "140px", height: "140px", position: "relative" }}>
-                  <Image src="/3.jpg" fill className="rounded-circle border border-3 border-light shadow-sm" style={{ objectFit: "cover" }} alt="Product" />
+                  <Image src="/3.jpg" fill className="rounded-circle border border-3 border-light shadow-sm" style={{ objectFit: "cover" }} alt="Organic Extracts" />
                 </div>
-                <h5 className="fw-bold mb-1">Garlic</h5>
+                <h5 className="fw-bold mb-1">Pure Extracts</h5>
                 <p className="text-success small fw-bold text-uppercase">Bulk Export</p>
-              </div>
-            </div>
-
-            {/* Product 4 (Added from your second row) */}
-            <div className="col-lg-4 col-md-6">
-              <div className="card border-0 shadow-sm p-4 h-100">
-                <div className="mx-auto mb-3" style={{ width: "140px", height: "140px", position: "relative" }}>
-                  <Image src="/1.jpg" fill className="rounded-circle border border-3 border-light shadow-sm" style={{ objectFit: "cover" }} alt="Product" />
-                </div>
-                <h5 className="fw-bold mb-1">Garlic</h5>
-                <p className="text-success small fw-bold text-uppercase">Seed Variety</p>
-              </div>
-            </div>
-
-            {/* Product 5 (Added from your second row) */}
-            <div className="col-lg-4 col-md-6">
-              <div className="card border-0 shadow-sm p-4 h-100">
-                <div className="mx-auto mb-3" style={{ width: "140px", height: "140px", position: "relative" }}>
-                  <Image src="/2.jpg" fill className="rounded-circle border border-3 border-light shadow-sm" style={{ objectFit: "cover" }} alt="Product" />
-                </div>
-                <h5 className="fw-bold mb-1">Garlic</h5>
-                <p className="text-success small fw-bold text-uppercase">Natural Process</p>
               </div>
             </div>
 
@@ -164,13 +127,9 @@ const AboutPage = () => {
             <div className="col-lg-10">
               <div className="card border-0 rounded-5 p-4 p-md-5 bg-white shadow-sm overflow-hidden position-relative">
                 <div className="row align-items-center position-relative" style={{ zIndex: 1 }}>
-                  <div className="col-lg-6 mb-4 mb-lg-0">
-                    <h3 className="fw-bold mb-2">Corporate Intelligence Brief</h3>
-                    <p className="text-muted mb-0">Join 5,000+ industry professionals receiving our monthly harvest and sustainability reports.</p>
-                  </div>
-                  <div className="col-lg-6 mb-4 mb-lg-0">
-                    <h3 className="fw-bold mb-2">Corporate Intelligence Brief</h3>
-                    <p className="text-muted mb-0">Join 5,000+ industry professionals receiving our monthly harvest and sustainability reports.</p>
+                  <div className="col-lg-12 mb-4 mb-lg-0 text-center">
+                    <h3 className="fw-bold mb-2">Partner with DK Organics</h3>
+                    <p className="text-muted mb-0">Join thousands of farmers making the natural switch. Connect with our advisory board today.</p>
                   </div>
                 </div>
               </div>

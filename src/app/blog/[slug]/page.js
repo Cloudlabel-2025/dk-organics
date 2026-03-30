@@ -129,18 +129,17 @@ const BlogDetailPage = () => {
         pointerEvents: 'none'
       }}></div>
 
-      {/* Article Container */}
       <article style={{
         maxWidth: '800px',
         margin: '0 auto',
         backgroundColor: 'white',
-        borderRadius: isMobile ? '30px' : '50px',
+        borderRadius: isMobile ? '16px' : '24px',
         overflow: 'hidden',
-        boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
+        boxShadow: '0 10px 40px rgba(0,0,0,0.06)',
         position: 'relative',
         zIndex: 1,
         animation: 'fadeIn 0.6s ease-in-out',
-        border: '1px solid rgba(138, 180, 64, 0.1)'
+        border: '1px solid #eef2e6'
       }}>
         
         {/* Back Button */}
@@ -175,14 +174,14 @@ const BlogDetailPage = () => {
           height: isMobile ? '280px' : '450px', 
           position: 'relative', 
           margin: isMobile ? '20px 20px 0' : '30px 0 0',
-          borderRadius: isMobile ? '20px' : '40px',
+          borderRadius: isMobile ? '12px' : '20px',
           overflow: 'hidden'
         }}>
           <Image 
             src={blog.coverImage || '/1.jpg'} 
             alt={blog.title}
             fill
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: 'contain', backgroundColor: '#F2F7F0' }}
             priority
           />
           

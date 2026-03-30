@@ -56,8 +56,10 @@ const ProductsPage = () => {
               <Image src="/1.jpg" alt="Farm" fill priority style={{ objectFit: 'cover' }} className="opacity-25" />
             </div>
             <div className="container position-relative py-5 text-center" style={{ zIndex: 1 }}>
-              <h1 className="display-4 fw-bold text-dark">Organic Database</h1>
-              <p className="lead">Manage and view your farm research records.</p>
+              <h1 className="display-4 fw-bold text-dark">Roots to Remedies</h1>
+              <p className="lead fw-bold text-dark" style={{ textShadow: '0 2px 10px rgba(255,255,255,0.8)' }}>
+                Explore our natural, garlic-based crop protection and plant health solutions.
+              </p>
             </div>
           </section>
     <div style={{ backgroundColor: '#FCFAF2', minHeight: '100vh', padding: isMobile ? '30px 15px' : '60px 20px' }}>
@@ -91,60 +93,80 @@ const ProductsPage = () => {
             products.map((product, index) => (
               <div key={product._id} style={{
                 backgroundColor: 'white',
-                borderRadius: '40px',
-                border: '2px solid #8AB440',
+                borderRadius: '16px',
+                border: '1px solid #eef2e6',
                 overflow: 'hidden',
-                boxShadow: '0 10px 30px rgba(138, 180, 64, 0.1)',
-                transition: 'transform 0.3s ease',
-                position: 'relative'
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.05)',
+                transition: 'all 0.3s ease',
+                position: 'relative',
+                display: 'flex',
+                flexDirection: 'column'
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-8px)';
+                e.currentTarget.style.boxShadow = '0 15px 40px rgba(138, 180, 64, 0.15)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.05)';
               }}>
                 
-                {/* Category Badge */}
                 <div style={{
                   position: 'absolute',
-                  top: '20px',
-                  right: '20px',
-                  backgroundColor: '#8AB440',
+                  top: '15px',
+                  right: '15px',
+                  backgroundColor: 'rgba(138, 180, 64, 0.9)',
+                  backdropFilter: 'blur(5px)',
                   color: 'white',
-                  padding: '8px 16px',
+                  padding: '6px 14px',
                   borderRadius: '20px',
-                  fontSize: '0.8rem',
-                  fontWeight: 'bold',
-                  zIndex: 2
+                  fontSize: '0.75rem',
+                  fontWeight: '600',
+                  letterSpacing: '0.5px',
+                  zIndex: 2,
+                  boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
                 }}>
                   {product.category || 'Organic'}
                 </div>
 
                 {/* Product Image */}
-                <div style={{ height: '280px', overflow: 'hidden' }}>
-                  <img 
+                <div style={{ 
+                  position: 'relative', 
+                  width: '100%', 
+                  paddingTop: '75%', /* 4:3 Aspect Ratio */
+                  overflow: 'hidden',
+                  backgroundColor: '#f9fbf7'
+                }}>
+                  <Image 
                     src={product.image && product.image.startsWith('http') ? product.image : (product.image || '/1.jpg')} 
                     alt={product.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover'
+                      objectFit: 'contain',
+                      transition: 'transform 0.5s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.transform = 'scale(1.05)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.transform = 'scale(1)';
                     }}
                     onError={(e) => {
-                      e.target.src = '/1.jpg';
+                      e.currentTarget.src = '/1.jpg'; // Note: onError with standard Next.js Image might require a separate state, but keeping logic similar
+                      e.currentTarget.srcset = '';
                     }}
                   />
                 </div>
                 
                 {/* Product Info */}
-                <div style={{ padding: isMobile ? '25px' : '30px' }}>
+                <div style={{ padding: isMobile ? '20px' : '25px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
                   <h3 style={{ 
-                    fontSize: '1.5rem', 
-                    fontWeight: 'bold', 
-                    color: '#333', 
-                    marginBottom: '12px',
-                    lineHeight: '1.3'
+                    fontSize: '1.35rem', 
+                    fontWeight: '700', 
+                    color: '#2d3e2d', 
+                    marginBottom: '10px',
+                    lineHeight: '1.4'
                   }}>{product.name}</h3>
                   
                   <p style={{ 
@@ -176,23 +198,24 @@ const ProductsPage = () => {
                   <Link href={`/product/${product.slug}`}>
                     <button style={{
                       width: '100%',
-                      padding: '14px',
-                      backgroundColor: '#8AB440',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '25px',
-                      fontSize: '1rem',
+                      padding: '12px',
+                      backgroundColor: 'transparent',
+                      color: '#8AB440',
+                      border: '2px solid #8AB440',
+                      borderRadius: '8px',
+                      fontSize: '0.95rem',
                       fontWeight: '600',
                       cursor: 'pointer',
-                      transition: 'all 0.3s ease'
+                      transition: 'all 0.3s ease',
+                      marginTop: 'auto'
                     }}
                     onMouseEnter={(e) => {
-                      e.target.style.backgroundColor = '#7a9f39';
-                      e.target.style.transform = 'scale(1.02)';
+                      e.target.style.backgroundColor = '#8AB440';
+                      e.target.style.color = 'white';
                     }}
                     onMouseLeave={(e) => {
-                      e.target.style.backgroundColor = '#8AB440';
-                      e.target.style.transform = 'scale(1)';
+                      e.target.style.backgroundColor = 'transparent';
+                      e.target.style.color = '#8AB440';
                     }}>
                       View Details
                     </button>

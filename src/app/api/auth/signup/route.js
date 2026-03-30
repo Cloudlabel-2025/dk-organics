@@ -5,10 +5,16 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
   try {
     await connectDB();
-    const { username, email, password, confirmPassword } = await request.json();
+    const { username, email, password, confirmPassword, secretKey } = await request.json();
 
-    if (!username || !email || !password || !confirmPassword) {
+    if (!username || !email || !password || !confirmPassword || !secretKey) {
       return NextResponse.json({ success: false, error: "All fields required" }, { status: 400 });
+    }
+
+    // Site Owner Secret Key Verification
+    const VALID_SECRET_KEY = process.env.ADMIN_SIGNUP_KEY || "DKOrganic2026";
+    if (secretKey !== VALID_SECRET_KEY) {
+      return NextResponse.json({ success: false, error: "Invalid Admin Secret Key" }, { status: 403 });
     }
 
     if (password !== confirmPassword) {
@@ -31,7 +37,7 @@ export async function POST(request) {
       username,
       email,
       password,
-      role: 'admin'
+      role: 'viewer'
     };
 
     const user = new User(userData);

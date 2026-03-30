@@ -139,7 +139,7 @@ export const UpdateProducts = () => {
 
   return (
     <div>
-      <h3 style={{ color: '#2F5233', marginBottom: '30px', fontSize: '1.8rem' }}>Update Products</h3>
+      <h3 style={{ color: '#2F5233', marginBottom: '30px', fontSize: '1.8rem' }}>Manage Products</h3>
 
       {message && (
         <div style={{
@@ -160,32 +160,34 @@ export const UpdateProducts = () => {
             display: 'flex',
             gap: '20px',
             padding: '20px',
-            border: '2px solid #E8F5E8',
-            borderRadius: '15px',
+            border: '1px solid #eef2e6',
+            boxShadow: '0 4px 15px rgba(0,0,0,0.02)',
+            borderRadius: '16px',
+            backgroundColor: 'white',
             flexDirection: 'column'
           }}>
             {editingId === product._id ? (
               <div style={{ display: 'grid', gap: '15px' }}>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Name</label>
-                  <input type="text" value={editData.name} onChange={(e) => setEditData({ ...editData, name: e.target.value })} placeholder="Name" style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
+                  <input type="text" value={editData.name} onChange={(e) => setEditData({ ...editData, name: e.target.value })} placeholder="Name" style={{ width: '100%', padding: '10px', border: '1px solid #eef2e6', borderRadius: '8px', outline: 'none' }} onFocus={(e) => e.target.style.borderColor = '#8AB440'} onBlur={(e) => e.target.style.borderColor = '#eef2e6'} />
                 </div>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Description</label>
-                  <textarea value={editData.description} onChange={(e) => setEditData({ ...editData, description: e.target.value })} placeholder="Description" style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px', minHeight: '80px' }} />
+                  <textarea value={editData.description} onChange={(e) => setEditData({ ...editData, description: e.target.value })} placeholder="Description" style={{ width: '100%', padding: '10px', border: '1px solid #eef2e6', borderRadius: '8px', minHeight: '80px', outline: 'none', resize: 'vertical' }} onFocus={(e) => e.target.style.borderColor = '#8AB440'} onBlur={(e) => e.target.style.borderColor = '#eef2e6'} />
                 </div>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Image</label>
-                  <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploading} style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
+                  <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploading} style={{ width: '100%', padding: '10px', border: '1px solid #eef2e6', borderRadius: '8px', outline: 'none' }} />
                   {editData.image && <img src={editData.image} alt="preview" style={{ marginTop: '10px', maxWidth: '150px', borderRadius: '8px' }} />}
                 </div>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Category</label>
-                  <input type="text" value={editData.category} onChange={(e) => setEditData({ ...editData, category: e.target.value })} placeholder="Category" style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
+                  <input type="text" value={editData.category} onChange={(e) => setEditData({ ...editData, category: e.target.value })} placeholder="Category" style={{ width: '100%', padding: '10px', border: '1px solid #eef2e6', borderRadius: '8px', outline: 'none' }} onFocus={(e) => e.target.style.borderColor = '#8AB440'} onBlur={(e) => e.target.style.borderColor = '#eef2e6'} />
                 </div>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', color: '#2F5233', fontWeight: '600' }}>Brochure (PDF)</label>
-                  <input type="file" accept=".pdf" onChange={handleBrochureUpload} disabled={uploading} style={{ width: '100%', padding: '10px', border: '2px solid #E8F5E8', borderRadius: '8px' }} />
+                  <input type="file" accept=".pdf" onChange={handleBrochureUpload} disabled={uploading} style={{ width: '100%', padding: '10px', border: '1px solid #eef2e6', borderRadius: '8px', outline: 'none' }} />
                   {editData.brochure && (
                     <div style={{ marginTop: '10px', display: 'flex', gap: '10px', alignItems: 'center' }}>
                       <span style={{ color: '#2F5233', fontWeight: '600' }}>📄 Brochure uploaded</span>

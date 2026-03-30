@@ -252,69 +252,6 @@ export default function Home() {
           <div className="decor-seed" style={{ top: '40%', right: '5%' }}></div>
         </div>
       </section>
-      {/*
-      <section>
-        <div className="services-container">
-          <header className="services-header">
-            <h2>Our Pure Services</h2>
-            <p>Moving beyond the traditional to bring nature closer to you.</p>
-          </header>
-
-          <div className="services-grid">
-
-            <div className="service-card">
-              <div className="service-image-wrapper shape-water">
-                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=800" />
-              </div>
-              <div className="service-text">
-                <span className="service-number">01</span>
-                <h3>Soil Revitalization</h3>
-                <p>We use proprietary microbial blends to bring tired soil back to life.</p>
-                <button className="organic-btn">Explore</button>
-              </div>
-            </div>
-
-            <div className="service-card">
-              <div className="service-image-wrapper shape-water">
-                <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=800" />
-              </div>
-              <div className="service-text">
-                <span className="service-number">02</span>
-                <h3>Natural Pest Control</h3>
-                <p>Protecting ecosystems without harsh chemicals.</p>
-                <button className="organic-btn">Explore</button>
-              </div>
-            </div>
-
-            <div className="service-card">
-              <div className="service-image-wrapper shape-pebble">
-                <img src="https://images.unsplash.com/photo-1589923188900-85dae523342b?q=80&w=800" />
-              </div>
-              <div className="service-text">
-                <span className="service-number">03</span>
-                <h3>Organic Fertilization</h3>
-                <p>Slow-release nutrients sourced naturally.</p>
-                <button className="organic-btn">Explore</button>
-              </div>
-            </div>
-
-            <div className="service-card">
-              <div className="service-image-wrapper shape-bean">
-                <img src="https://images.unsplash.com/photo-1558449028-b53a39d100fc?q=80&w=800" />
-              </div>
-              <div className="service-text">
-                <span className="service-number">04</span>
-                <h3>Eco-Irrigation</h3>
-                <p>Smart systems that mimic rainfall.</p>
-                <button className="organic-btn">Explore</button>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      
-      </section>
-      */}
       {/* SECTION 2: OUR ESSENCE */}
     <section className="essence-section">
   <div className="container">

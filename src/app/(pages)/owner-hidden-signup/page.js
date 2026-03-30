@@ -8,7 +8,8 @@ const SignupPage = () => {
     username: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+    secretKey: ""
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -44,10 +45,10 @@ const SignupPage = () => {
     <div style={{ backgroundColor: '#FCFAF2', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
       <div style={{
         backgroundColor: 'white',
-        borderRadius: '25px',
+        borderRadius: '16px',
         padding: '50px 40px',
-        boxShadow: '0 15px 35px rgba(138, 180, 64, 0.1)',
-        border: '2px solid #8AB440',
+        boxShadow: '0 10px 40px rgba(0, 0, 0, 0.05)',
+        border: '1px solid #eef2e6',
         maxWidth: '450px',
         width: '100%'
       }}>
@@ -86,14 +87,14 @@ const SignupPage = () => {
               style={{
                 width: '100%',
                 padding: '15px',
-                border: '2px solid #E8F5E8',
-                borderRadius: '12px',
+                border: '1px solid #eef2e6',
+                borderRadius: '8px',
                 fontSize: '1rem',
                 outline: 'none',
                 transition: 'border-color 0.3s'
               }}
               onFocus={(e) => e.target.style.borderColor = '#8AB440'}
-              onBlur={(e) => e.target.style.borderColor = '#E8F5E8'}
+              onBlur={(e) => e.target.style.borderColor = '#eef2e6'}
               required
             />
           </div>
@@ -109,14 +110,14 @@ const SignupPage = () => {
               style={{
                 width: '100%',
                 padding: '15px',
-                border: '2px solid #E8F5E8',
-                borderRadius: '12px',
+                border: '1px solid #eef2e6',
+                borderRadius: '8px',
                 fontSize: '1rem',
                 outline: 'none',
                 transition: 'border-color 0.3s'
               }}
               onFocus={(e) => e.target.style.borderColor = '#8AB440'}
-              onBlur={(e) => e.target.style.borderColor = '#E8F5E8'}
+              onBlur={(e) => e.target.style.borderColor = '#eef2e6'}
               required
             />
           </div>
@@ -132,14 +133,14 @@ const SignupPage = () => {
               style={{
                 width: '100%',
                 padding: '15px',
-                border: '2px solid #E8F5E8',
-                borderRadius: '12px',
+                border: '1px solid #eef2e6',
+                borderRadius: '8px',
                 fontSize: '1rem',
                 outline: 'none',
                 transition: 'border-color 0.3s'
               }}
               onFocus={(e) => e.target.style.borderColor = '#8AB440'}
-              onBlur={(e) => e.target.style.borderColor = '#E8F5E8'}
+              onBlur={(e) => e.target.style.borderColor = '#eef2e6'}
               required
             />
           </div>
@@ -155,16 +156,40 @@ const SignupPage = () => {
               style={{
                 width: '100%',
                 padding: '15px',
-                border: '2px solid #E8F5E8',
-                borderRadius: '12px',
+                border: '1px solid #eef2e6',
+                borderRadius: '8px',
                 fontSize: '1rem',
                 outline: 'none',
                 transition: 'border-color 0.3s'
               }}
               onFocus={(e) => e.target.style.borderColor = '#8AB440'}
-              onBlur={(e) => e.target.style.borderColor = '#E8F5E8'}
+              onBlur={(e) => e.target.style.borderColor = '#eef2e6'}
               required
             />
+          </div>
+
+          <div style={{ marginBottom: '30px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', color: '#8AB440', fontWeight: '600' }}>
+              Admin Secret Key
+            </label>
+            <input
+              type="password"
+              value={formData.secretKey}
+              onChange={(e) => setFormData({...formData, secretKey: e.target.value})}
+              style={{
+                width: '100%',
+                padding: '15px',
+                border: '1px solid #eef2e6',
+                borderRadius: '8px',
+                fontSize: '1rem',
+                outline: 'none',
+                transition: 'border-color 0.3s'
+              }}
+              onFocus={(e) => e.target.style.borderColor = '#8AB440'}
+              onBlur={(e) => e.target.style.borderColor = '#eef2e6'}
+              required
+            />
+            <small style={{ color: '#888', display: 'block', marginTop: '5px' }}>Required to authorize owner registration.</small>
           </div>
 
           <button
@@ -173,15 +198,21 @@ const SignupPage = () => {
             style={{
               width: '100%',
               padding: '15px',
-              backgroundColor: loading ? '#ccc' : '#2F5233',
+              backgroundColor: loading ? '#ccc' : '#8AB440',
               color: 'white',
               border: 'none',
-              borderRadius: '25px',
+              borderRadius: '8px',
               fontSize: '1.1rem',
               fontWeight: '600',
               cursor: loading ? 'not-allowed' : 'pointer',
               transition: 'all 0.3s ease',
               marginBottom: '20px'
+            }}
+            onMouseEnter={(e) => {
+              if (!loading) e.target.style.backgroundColor = '#7a9f39';
+            }}
+            onMouseLeave={(e) => {
+              if (!loading) e.target.style.backgroundColor = '#8AB440';
             }}
           >
             {loading ? 'Creating Account...' : 'Sign Up'}
@@ -196,9 +227,9 @@ const SignupPage = () => {
             <button style={{
               backgroundColor: 'transparent',
               color: '#8AB440',
-              border: '2px solid #8AB440',
+              border: '1px solid #8AB440',
               padding: '12px 30px',
-              borderRadius: '25px',
+              borderRadius: '8px',
               fontSize: '1rem',
               fontWeight: '600',
               cursor: 'pointer',
